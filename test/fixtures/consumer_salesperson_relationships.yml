@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  consumer_id: 1
+  salesperson_id: 1
+  owner_type: MyString
+  visibility_id: 1
+
+two:
+  consumer_id: 1
+  salesperson_id: 1
+  owner_type: MyString
+  visibility_id: 1

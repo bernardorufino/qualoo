@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  level: 1
+  measured_id: 1
+  measurer_id: 1
+
+two:
+  level: 1
+  measured_id: 1
+  measurer_id: 1
