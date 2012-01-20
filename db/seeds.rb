@@ -31,37 +31,37 @@ User.create([{
   email: "bermonruf@gmail.com",
   first_name: "Bernardo",
   last_name:  "Rufino",
-  password_hash: default_password,
+  password: default_password,
   profile: Consumer.find(1)
 }, {
   email: "rodolfo@qualoo.com",
   first_name: "Rodolfo",
   last_name: "Pinotti",
-  password_hash: default_password,
+  password: default_password,
   profile: Consumer.find(2)
 }, {
   email: "yuri@qualoo.com",
   first_name: "Yuri",
   last_name: "Oliveira",
-  password_hash: default_password,
+  password: default_password,
   profile: Consumer.find(3)
 }, {
   email: "rebeca@black.com",
   first_name: "Rebeca",
   last_name: "Black",
-  password_hash: default_password,
+  password: default_password,
   profile: Salesperson.find(1)
 }, {
   email: "fernanda.hock@gmail.com",
   first_name: "Fernanda",
   last_name: "Hock",
-  password_hash: default_password,
+  password: default_password,
   profile: Salesperson.find(2)
 }, {
   email: "silviamo@hotmail.com",
   first_name: "Silvia",
   last_name: "Morrone",
-  password_hash: default_password,
+  password: default_password,
   profile: Salesperson.find(3)
 }]);
 

@@ -1,0 +1,308 @@
+$text-color: #000000;
+$light-color: #333333;
+$shadow-color: #DDD;
+$shadow-bg-color: #F3F3F3;
+$bg-color: #FFF;
+$deep-bg-color: #EEE;
+$main-color: #D0232E;
+$main-color: #D0232E;
+
+// Not based in this anymore, check line 20,21
+$center-min-width: 600px;
+$center-relative-width: 0.7;
+
+html {
+	font-family: "Helvetica Neue", Arial, sans-serif;
+	font-size: 10pt;
+	color: $text-color;
+}
+body {
+	// Forget the focus on center
+	min-width: round($center-min-width / $center-relative-width);
+	background-color: $deep-bg-color;
+}
+#header {
+	background-color: $bg-color;
+	height: 80px;
+	border: {
+		bottom: 2px solid $shadow-color;
+	}
+	ul {
+		display: block;
+		float: right;
+		margin: 34px 4px 0px 0px;
+		li {
+			cursor: default;
+			display: inline;
+			border-top: 4px solid $main-color;
+			&:hover {
+				border-color: $bg-color;
+				background-color: $main-color;
+				color: $bg-color;
+				a {
+					color: $bg-color;
+					&:hover {
+						text-decoration: none;
+					}
+				}
+			}
+			a {
+				padding: 2px;
+				color: $light-color;
+			}
+		}
+	}
+	h1 a {
+		margin: 8px 0px 0px 10px;
+		display: block;
+		width: 158px;
+		height: 65px;
+		text-indent: -99999px;
+		background-image: image-url("logo.png");
+		float: left;
+	}
+}
+$main-padding: 20px;
+@mixin centralized {
+	width: percentage($center-relative-width);
+	margin: 0px 17% 0px 13%;
+	padding-left: $main-padding;
+	padding-right: $main-padding;
+}
+#nav {
+	@include centralized;
+	margin-top: -2px;
+	background-color: $main-color;
+	border-left: 1px solid $shadow-color;
+	border-right: 1px solid $shadow-color;
+	height: 30px;
+}
+#main {
+	@include centralized;
+	background-color: $bg-color;
+	border: 1px solid $shadow-color;
+	border-top: none;
+	padding: $main-padding;
+	padding-top: $main-padding / 2;
+}
+#main h2 {
+	color: lighten($light-color, 10%);
+	margin: 5px (-$main-padding) 5px (-$main-padding);
+	background-color: $shadow-bg-color;
+	padding: 5px 5px 5px ($main-padding - 10px);
+	border-bottom: 1px solid $shadow-color;
+	border-top: 1px solid $shadow-color;
+}
+#main h3, #main h4 {
+	color: lighten($light-color, 2%);
+}
+#main h5, #main h6 {
+	color: lighten($light-color, 0%);
+}
+#main h2:first-child {
+	margin-top: -($main-padding / 2);
+	border-top: none;
+}
+#footer {
+	@include centralized;
+	color: lighten($light-color, 30%);
+	text-align: center;
+	margin-top: 10px;
+	padding-top: 84px;
+	background: {
+		image: image-url("logo-grey.png");
+		repeat: no-repeat;
+		position: center 8px;
+	}
+	a {
+		color: lighten($light-color, 30%);
+		&:hover {
+			color: lighten($light-color, 10%);
+			text-decoration: underline;
+		}
+	}
+}
+#nav ul {
+	text-align: center;
+	position: relative;
+	top: 7px;
+	color: darken($bg-color, 25%);
+	a, a:hover, a:visited, a:active {
+		color: $bg-color;
+	}
+}
+
+$alert-color: #786207;
+$error-color: #9F0B0F;
+
+// FLASHED
+
+.flash-notice, .flash-info, .flash-alert, .flash-error {
+        font-weight: bold;
+        margin: 15px 0px 14px 0px;
+        padding: 6px 6px 6px 36px;
+        background-color: #FFFFFF;
+        background-repeat: no-repeat;
+        background-position: 5px 50%;
+        border: 2px solid #FFFFFF;
+}
+.flash-notice {
+        color: #1F781B;
+        border-color: #1F781B;
+        background-color: #C4F5BC;
+        background-image: url(http://i85.photobucket.com/albums/k43/bermonruf/sites_images/notice1small.gif);
+}
+.flash-info {
+        color: #173480;
+        border-color: #173480;
+        background-color: #B8D6FA;
+        background-image: url(http://i85.photobucket.com/albums/k43/bermonruf/sites_images/info1small.gif);
+}
+.flash-alert {
+        color: #786207;
+        border-color: #786207;
+        background-color: #F8EDA5;
+        background-image: url(http://i85.photobucket.com/albums/k43/bermonruf/sites_images/warning1small.gif);
+}
+.flash-error {
+        color: #9F0B0F;
+        border-color: #9F0B0F;
+        background-color: #F9B7B7;
+        background-image: url(http://i85.photobucket.com/albums/k43/bermonruf/sites_images/error1small.gif);
+}
+
+// SAMPLE TAG AND USE
+
+ul.inline {
+	li {
+		display: inline;
+	}
+}
+
+$label-width: 150px;
+$tiny-form-width: 220px;
+$tiny-label-width: 50px;
+$small-form-width: 400px;
+$medium-form-width: 500px;
+$large-form-width: 600px;
+$trailing-width: 15px;
+$sized-inputs: "input[type=text], input[type=password], textarea";
+$link-color: #0000EE;
+
+img.icon {
+	position: relative;
+	top: 3px;
+}
+img[src="#{image_path('icons/email.png')}"] {
+	top: 4px;
+}
+#users a {
+	color: $text-color;
+	&:hover {
+		color: $link-color;
+	}
+}
+form, form.small {
+	width: $small-form-width;
+	margin: 0 auto 0 auto; 
+	label {
+		width: $label-width;
+	}
+	#{$sized-inputs} {
+		width: $small-form-width - $label-width - $trailing-width;
+	}
+}
+form.tiny{
+	width: $tiny-form-width;
+	label {
+		width: $tiny-label-width;
+	}
+	#{$sized-inputs} {
+		width: $tiny-form-width - $tiny-label-width - $trailing-width;
+	}
+}
+form.medium {
+	width: $medium-form-width;
+	#{$sized-inputs} {
+		width: $medium-form-width - $label-width - $trailing-width;
+	}
+}
+form.large {
+	width: $large-form-width;
+	#{$sized-inputs} {
+		width: $large-form-width - $label-width - $trailing-width;
+	}
+}
+form {
+	input[type=checkbox], input[type=radio] {
+		margin-left: 0px;
+		margin-right: 4px;
+		position: relative;
+		top: 2px;
+	}
+	fieldset > label, & > label {
+		padding: 2px;
+		text-align: right;
+		display: block;
+		float: left;
+	}
+	fieldset > label.error, & > label.error {
+		font-weight: bold;
+		color: lighten($error-color, 18%);
+	}
+	fieldset {
+		padding: 2px;
+	}
+	.input-info {
+		padding-left: 5px;
+		label {
+			padding: 2px;
+		}
+	}
+	.info {
+		color: lighten($alert-color, 18%);
+		margin-left: $label-width + 6px;
+		padding: 3px 0px 2px 0px;
+	}
+	.actions {
+		border-top: 1px solid $shadow-color;
+		padding: 5px;
+		margin-top: 8px;
+		text-align: right;
+		margin-right: 3px;
+		background-color: $shadow-bg-color;
+		input {
+			width: auto;
+		}
+	}
+	// last-child ass classes here as a hack for IE, see javascripts/application.js
+	// Need separated rule because IE doest parse rules when there is one it doesnt support in the same line
+	&.last-child .actions.last-child {
+		margin-bottom: -$main-padding;
+	}
+	&:last-child .actions:last-child {
+		margin-bottom: -$main-padding;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

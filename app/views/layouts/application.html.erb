@@ -1,14 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Qualoo</title>
+  <title>Qualoo<%= title :prefix => " | " %></title>
+  <link rel="shortcut icon" href="<%= asset_path "favicon.ico" %>" />
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+<div id="header">
+	<h1><%= link_to "Qualoo", root_path %></h1>
+	<ul id="main-actions">
+		<% if logged_in? %>
+			<li><%= link_to current_user.name, user_path(current_user) %></li>
+			<li><%= link_to "Dashboard", page_path(:dashboard) %></li>
+			<li><%= link_to "Logout", logout_path %></li>	
+		<% else %>
+			<li><%= link_to "Login", login_path %></li>
+			<li><%= link_to "Cadastro", new_user_path %></li>
+		<% end %>
+	</ul>
+	<!--<ul id="network">
+		<li><a id="twitter" href="#twitter">Twitter</a></li>
+		<li><a id="facebook" href="#facebook">Facebook</a></li>
+		<li><a id="orkut" href="#orkut">Orkut</a></li>
+	</ul>-->
+</div>
+<div id="nav">
+	<ul class="inline">
+		<li><%= link_to "Usuarios", users_path %></li> | 
+		<li><%= link_to "Revendedores", salespeople_path %></li> | 
+		<li><%= link_to "Clientes", consumers_path %></li>
+	</ul>
+</div>
+<div id="main">
+	<% if title? %>
+		<h2><%= title %></h2>
+	<% end %>
+	<%= flash_msgs %>
+	<%= yield %>
+</div>
+<div id="footer">
+	<p><strong>Qualoo</strong></p>
+	<p>
+		<a href="#quem-somos">Termos</a> | 
+		<a href="#quem-somos">Quem somos</a> | 
+		<a href="#contato">Contato</a>
+	</p>
+</div>
 
 </body>
 </html>

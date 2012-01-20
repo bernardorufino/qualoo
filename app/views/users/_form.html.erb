@@ -1,0 +1,20 @@
+<%= form_for @user do |f| %>
+
+	<%= f.field_set :first_name, "Nome: " %>
+	<%= f.field_set :last_name, "Sobrenome: " %>
+	<%= f.field_set :email, "Email: " %>
+	<% unless @user.new_record? %>
+		<p class="info">Deixe a senha e a confirmação de senha em branco para não alterá-la.</p>
+	<% end %>
+	<%= f.field_set :password, "Senha: ", :type => :password_field %>
+	<%= f.field_set :password_confirmation, "Confirmação de senha: ", :type => :password_field %>
+	<%= f.field_set :profile_type, "Você é um(a)?" do |m| %>
+		<% for profile_type in User.profile_types %>
+			<%= f.label m, friendly_profile_name(profile_type), :value => profile_type %>
+			<%= f.radio_button m, profile_type, :checked => @user.profile?(profile_type) %>
+		<% end %>
+	<% end %>
+	
+	<%= form_actions :submit => submit %>
+	
+<% end %>

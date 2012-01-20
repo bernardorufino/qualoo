@@ -1,6 +1,9 @@
 class Visibility < ActiveRecord::Base
   has_many :consumer_salesperson_relationships;
   
+  validates_presence_of :name;
+  validates :symbol, presence: true, uniqueness: true;
+  
   def symbol
     read_attribute(:symbol).to_sym;
   end

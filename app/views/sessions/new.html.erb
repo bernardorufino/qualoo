@@ -1,0 +1,8 @@
+<%= form_tag session_path, :class => "tiny" do |f| %>
+
+	<%= field_set_tag :email, "Email: " %>
+	<%= field_set_tag :password, "Senha: ", :type => :password_field_tag %>
+	
+	<%= form_actions :submit => "Login" %>
+	
+<% end %>

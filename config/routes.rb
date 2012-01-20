@@ -1,4 +1,14 @@
 Qualoo::Application.routes.draw do
+  root :to => "pages#welcome";
+  resources :users;
+  resource :session;
+  match "login" => "sessions#new", :as => :login;
+  match "logout" => "sessions#destroy", :as => :logout;
+  match "salespeople" => "users#by_profile", :profile => "salesperson", :as => :salespeople;
+  match "consumers" => "users#by_profile", :profile => "consumer", :as => :consumers;
+  match "page/:action", :controller => "pages", :as => :page;
+  
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
