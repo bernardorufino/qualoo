@@ -3,6 +3,9 @@ class ConsumerSalespersonRelationship < ActiveRecord::Base
   belongs_to :salesperson;
   belongs_to :visibility;
   
+  validates :owner_type, presence: true, 
+                         uniqueness: {scope: [:consumer_id, :salesperson_id]};
+  
   # A finder which finds the relationships between salespeople and consumers from certain consumer
   # or salesperson, determined by hash-like argument or an object, with the additional parameter
   # :owner, that, when defined, restricts the search to those relationships which the object
@@ -39,6 +42,14 @@ class ConsumerSalespersonRelationship < ActiveRecord::Base
     results = results.where :owner_type => type if opts[:owner];
     results = results.where ["owner_type <> ?", type] if opts[:owner] == false;
     results;
+  end
+  
+  def owner
+    send(owner_type.downcase);
+  end
+  
+  def target
+    send(owner.relates_with.downcase);
   end
   
 end

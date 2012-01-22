@@ -8,4 +8,12 @@ class Salesperson < ActiveRecord::Base
   has_many :company_salesperson_contracts;
   has_many :companies, through: :company_salesperson_contracts;
   
+  def relates_with
+    "Consumer"
+  end
+  
+  def relates_with?(consumer)
+    consumers.include?(consumer);
+  end
+  
 end

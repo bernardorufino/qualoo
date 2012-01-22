@@ -1,0 +1,15 @@
+<% title @consumer.name %>
+<% before_flash do %>
+	<p class="title-actions">&nbsp;
+		<% if current_user.can_relate_with?(@consumer) and not current_profile.relates_with?(@consumer)  %>
+			<%= icon "group_add" %> 
+			<%= link_to "Adicionar #{friendly_profile_name(@consumer).downcase} a minha rede", 
+			    new_consumer_salesperson_relationship_path(:id => @consumer) %>
+		<% elsif current_user.can_relate_with?(@consumer) %>
+			<%= icon "group" %> Pertence a minha rede
+		<% end %>
+	</p>
+<% end %>
+<%= icon "email" %> <%= mail_to @consumer.email %><br />
+
+<%= user_icon @consumer %> <%= friendly_profile_name @consumer %>

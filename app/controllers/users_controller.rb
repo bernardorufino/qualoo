@@ -1,15 +1,5 @@
 class UsersController < ApplicationController  
-  
-  def by_profile
-    if User.profile_type?(params[:profile])
-      @users = User.find_by_profile(params[:profile]);
-      title friendly_profile_name(params[:profile], plural: true), :freeze => true;
-      render :action => :index;
-    else
-      flash[:alert] = "Voce nao esta autorizado a realizar tal operacao."
-      redirect_to root_path;
-    end
-  end
+  requires_authentication only: [:edit, :update];
   
   def index
     @users = User.all;
@@ -36,11 +26,11 @@ class UsersController < ApplicationController
   end
   
   def edit
-    @user = User.find(params[:id]);
+    @user = current_user;
   end
   
   def update
-    @user = User.find(params[:id]);
+    @user = current_user;
     if @user.update_attributes(params[:user])
       flash[:notice] = "Dados atualizados com sucesso!";
       redirect_to edit_user_path(@user)

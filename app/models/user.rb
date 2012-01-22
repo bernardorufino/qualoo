@@ -47,6 +47,10 @@ class User < ActiveRecord::Base
     return (user and user.authentic?(password)) ? user : nil;
   end  
   
+  def can_relate_with?(user)
+    profile and profile_type == user.profile.relates_with;
+  end
+  
   def name
     (first_name and last_name) ? "#{first_name} #{last_name}" : first_name;
   end

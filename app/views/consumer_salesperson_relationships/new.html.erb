@@ -1,0 +1,11 @@
+Deseja adicionar o <%= friendly_profile_name(@user).downcase %> <%= link_to @user.name, user_path(@user) %> à sua rede?
+<%= form_tag consumer_salesperson_relationships_path, :class => "answer" do %>
+	<%= hidden_fields :consumer_salesperson_relationship,
+		:consumer_id => @consumer.id,
+		:salesperson_id => @salesperson.id,
+		:owner_type => current_user.profile_type,
+		:visibility_id => Visibility.private.id
+	  %>
+	<%= hidden_field_tag :target_path, user_path(@user) %>
+	<%= submit_tag "Sim" %> | <%= link_to "Não", user_path(@user)  %>
+<% end %>

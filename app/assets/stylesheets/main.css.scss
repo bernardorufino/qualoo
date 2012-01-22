@@ -190,8 +190,7 @@ $sized-inputs: "input[type=text], input[type=password], textarea";
 $link-color: #0000EE;
 
 img.icon {
-	position: relative;
-	top: 3px;
+	vertical-align: middle;
 }
 img[src="#{image_path('icons/email.png')}"] {
 	top: 4px;
@@ -234,6 +233,9 @@ form.large {
 	}
 }
 form {
+	&.answer, &.answer * {
+		display: inline;
+	}
 	input[type=checkbox], input[type=radio] {
 		margin-left: 0px;
 		margin-right: 4px;
@@ -284,7 +286,13 @@ form {
 		margin-bottom: -$main-padding;
 	}
 }
-
+.title-actions {
+	margin-top: -(($main-padding / 2) + 20px);
+	margin-bottom: 9px;
+	position: relative;
+	left: 10px;
+	text-align: right;
+}
 
 
 

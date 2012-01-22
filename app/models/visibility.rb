@@ -4,16 +4,17 @@ class Visibility < ActiveRecord::Base
   validates_presence_of :name;
   validates :symbol, presence: true, uniqueness: true;
   
+  [:public, :private].each do |code|
+    define_singleton_method(code){first(:conditions => {symbol: code.to_s});};
+    define_method(code.to_s + "?"){symbol == code;}; 
+  end
+  
   def symbol
     read_attribute(:symbol).to_sym;
   end
   
   def symbol=(sym)
     write_attribute(:symbol, sym.to_s);
-  end
-  
-  [:public, :private].each do |code|
-    define_method(code.to_s + "?"){symbol == code;}; 
   end
   
 end
