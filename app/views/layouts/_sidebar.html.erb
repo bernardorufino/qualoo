@@ -1,0 +1,14 @@
+
+<h2>Pesquisa</h2>
+
+<%= form_tag root_path do %>
+	<%= text_field_tag :value %>
+	<%= submit_tag "Go" %>
+<% end %>
+
+<h2>Marcas</h2>
+<ul>
+<% for brand in Company.all %>
+	<li><%= brand.name %></li>
+<% end %>
+</ul>

@@ -1,6 +1,6 @@
 class ConsumersController < ApplicationController
   
-  def index
+  def index  
     @users = Consumer.all;
     title friendly_profile_name(:consumer, plural: true), :freeze => true;
     render "users/index";

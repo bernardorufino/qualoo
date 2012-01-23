@@ -2,6 +2,24 @@ module ApplicationHelper
   include EmbedFormHelper;
   include FieldSetHelper;
   
+  def main(opts={}, &content)
+    main = capture(&content);
+    opts.merge!(:class => "with-sidebar") if @sidebar and not @hide_sidebar;
+    content_tag(:div, main, {:id => "main"}.merge(opts));    
+  end
+  
+  # Call only once with block for setting up sidebar, the second call will have its block ignored
+  # Useful because the second call is at application.html.erb, which is the default
+  def sidebar(opts={}, &content)
+    @sidebar = content_tag(:div, capture(&content), {:id => "sidebar"}.merge(opts)) if block_given? and !@sidebar;
+    (@hide_sidebar) ? "" : (@sidebar || "");
+  end
+  
+  def no_sidebar
+    @sidebar = nil;
+    @hide_sidebar = true;
+  end
+  
   def before_flash(&code)
     if block_given?
       @before_flash = capture(&code);

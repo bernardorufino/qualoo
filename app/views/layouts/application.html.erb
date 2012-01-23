@@ -34,13 +34,20 @@
 		<li><%= link_to "Clientes", consumers_path %></li>
 	</ul>
 </div>
-<div id="main">
-	<% if title? %>
-		<h2><%= title %></h2>
+
+<%= main do %>
+	<%= sidebar do %> 
+		<%= render :partial => "layouts/sidebar" %>
 	<% end %>
-	<%= before_flash %>
-	<%= flash_msgs %>
-	<%= yield %>
+	<div id="content">
+		<% if title? %>
+			<h2><%= title %></h2>
+		<% end %>
+		<%= before_flash %>
+		<%= flash_msgs %>
+		<%= yield %>
+	</div>
+	<div class="clear"></div>
 </div>
 <div id="footer">
 	<p><strong>Qualoo</strong></p>
@@ -49,7 +56,7 @@
 		<a href="#quem-somos">Quem somos</a> | 
 		<a href="#contato">Contato</a>
 	</p>
-</div>
+<% end %>
 
 </body>
 </html>

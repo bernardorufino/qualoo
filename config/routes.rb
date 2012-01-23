@@ -1,6 +1,14 @@
 Qualoo::Application.routes.draw do
   root :to => "pages#welcome";
-  resources :users, :salespeople, :consumers, :consumer_salesperson_relationships;
+  resources :users, :consumer_salesperson_relationships;
+  # 2 resources below allow filter index action by salesperson/consumer, 
+  # allowing network (social app) support. Not used yet.
+  resources :salespeople, shallow: true do
+    resources :consumers;
+  end
+  resources :consumers, shallow: true do
+    resources :salespeople;
+  end
   resource :session;
   match "login" => "sessions#new", :as => :login;
   match "logout" => "sessions#destroy", :as => :logout;

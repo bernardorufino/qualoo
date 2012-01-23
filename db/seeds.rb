@@ -9,6 +9,9 @@
 Visibility.create name: "Publico", symbol: :public, description: "Todos podem ver";
 Visibility.create name: "Privado", symbol: :private, description: "So logados podem ver";
 
+Company.create(%w(Avon Jequiti Herbalife Natura Boticario).map{|name| {name: name}});
+
+# Comment below when done
 Consumer.create([{
   # Bernardo Rufino
 }, {

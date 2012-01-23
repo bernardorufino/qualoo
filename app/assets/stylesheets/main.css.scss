@@ -7,9 +7,9 @@ $deep-bg-color: #EEE;
 $main-color: #D0232E;
 $main-color: #D0232E;
 
-// Not based in this anymore, check line 20,21
-$center-min-width: 600px;
-$center-relative-width: 0.7;
+$center-min-width: 700px;
+$center-relative-width: 0.8;
+$center-margin: percentage((1 - $center-relative-width) / 2); 
 
 html {
 	font-family: "Helvetica Neue", Arial, sans-serif;
@@ -17,7 +17,6 @@ html {
 	color: $text-color;
 }
 body {
-	// Forget the focus on center
 	min-width: round($center-min-width / $center-relative-width);
 	background-color: $deep-bg-color;
 }
@@ -62,12 +61,11 @@ body {
 		float: left;
 	}
 }
-$main-padding: 20px;
+
+$main-spacing: 20px;
 @mixin centralized {
 	width: percentage($center-relative-width);
-	margin: 0px 17% 0px 13%;
-	padding-left: $main-padding;
-	padding-right: $main-padding;
+	margin: 0px $center-margin 0px $center-margin;
 }
 #nav {
 	@include centralized;
@@ -76,33 +74,92 @@ $main-padding: 20px;
 	border-left: 1px solid $shadow-color;
 	border-right: 1px solid $shadow-color;
 	height: 30px;
+	& > * {
+		display: block;
+		margin: 0 $main-spacing 0 $main-spacing;
+	}
 }
+
+$sidebar-width: 200px;
+// Borders overlap because of floating
+$sidebar-content-divisory-border: 1px solid $shadow-color;
+$sidebar-bg-color: $shadow-bg-color;
+
 #main {
 	@include centralized;
-	background-color: $bg-color;
+	background: {
+		// Change this as soon as you can to use sth created by our server
+		image: url("http://fakeimage.heroku.com/200x1.gif?color=!#{hexcode($sidebar-bg-color)}&textcolor=!#{hexcode($sidebar-bg-color)}");
+		repeat: repeat-y;
+		color: $bg-color;
+	}
 	border: 1px solid $shadow-color;
 	border-top: none;
-	padding: $main-padding;
-	padding-top: $main-padding / 2;
+	&.with-sidebar {
+		#content {
+			border-left: $sidebar-content-divisory-border;
+			margin-left: $sidebar-width;
+		}
+	}
 }
-#main h2 {
-	color: lighten($light-color, 10%);
-	margin: 5px (-$main-padding) 5px (-$main-padding);
-	background-color: $shadow-bg-color;
-	padding: 5px 5px 5px ($main-padding - 10px);
-	border-bottom: 1px solid $shadow-color;
-	border-top: 1px solid $shadow-color;
+#sidebar {
+	background-color: $sidebar-bg-color;
+	padding: ($main-spacing / 2);
+	// When changing the above, CHANGE the below and h2.margin
+	// width: $sidebar-width - padding-left - padding-right !
+	width: $sidebar-width - $main-spacing;
+	float: left;
+	border-right: $sidebar-content-divisory-border;
+	h2 {
+		text-align: center;
+		background-color: $shadow-color;
+		padding: 8px 5px 6px 5px;
+		margin: 5px (-($main-spacing / 2)) 5px (-($main-spacing / 2));
+		font-size: 120%;
+		&:first-child {
+			margin-top: -($main-spacing / 2);
+		}
+	}
 }
-#main h3, #main h4 {
-	color: lighten($light-color, 2%);
+#content {
+	padding: ($main-spacing / 2) $main-spacing ($main-spacing / 2) $main-spacing;
+	background-color: $bg-color;
+	h2 {
+		color: lighten($light-color, 10%);
+		margin: 5px (-$main-spacing) 5px (-$main-spacing);
+		background-color: $shadow-bg-color;
+		padding: 5px 5px 5px ($main-spacing - 10px);
+		border-bottom: 1px solid $shadow-color;
+		border-top: 1px solid $shadow-color;
+		&:first-child {
+			margin-top: -($main-spacing / 2);
+			margin-bottom: ($main-spacing / 2);
+			border-top: none;
+		}
+	}
+	h3, h4 {
+		color: lighten($light-color, 2%);
+	}
+	h5, h6 {
+		color: lighten($light-color, 0%);
+	}
 }
-#main h5, #main h6 {
-	color: lighten($light-color, 0%);
+.title-actions {
+	margin-top: -($main-spacing + 15px);
+	margin-bottom: 9px;
+	position: relative;
+	left: 10px;
+	text-align: right;
 }
-#main h2:first-child {
-	margin-top: -($main-padding / 2);
-	border-top: none;
+
+.clear {
+	display: block;
+	clear: both;
+	margin: 0;
+	padding: 0;
+	height: 0;
 }
+
 #footer {
 	@include centralized;
 	color: lighten($light-color, 30%);
@@ -234,6 +291,7 @@ form.large {
 }
 form {
 	&.answer, &.answer * {
+		width: auto;
 		display: inline;
 	}
 	input[type=checkbox], input[type=radio] {
@@ -280,21 +338,25 @@ form {
 	// last-child ass classes here as a hack for IE, see javascripts/application.js
 	// Need separated rule because IE doest parse rules when there is one it doesnt support in the same line
 	&.last-child .actions.last-child {
-		margin-bottom: -$main-padding;
+		margin-bottom: -$main-spacing;
 	}
 	&:last-child .actions:last-child {
-		margin-bottom: -$main-padding;
+		margin-bottom: -$main-spacing;
 	}
 }
-.title-actions {
-	margin-top: -(($main-padding / 2) + 20px);
-	margin-bottom: 9px;
-	position: relative;
-	left: 10px;
-	text-align: right;
+#sidebar {
+	form {
+		text-align: center;
+		width: auto;
+		* {
+			display: inline;
+			width: auto;
+		}
+	}
+	#{$sized-inputs} {
+		width: 0.6 * $sidebar_width;
+	}
 }
-
-
 
 
 
