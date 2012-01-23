@@ -3,9 +3,10 @@
 # Consumer.all.reject(&:user).each(&:destroy)
 # Salesperson.all.reject(&:user).each(&:destroy)
 class ApplicationController < ActionController::Base
-  # TODO: Do the same as did in Consumer#show to Salesperson#show
   # TODO: Show users and salespeople relationed to each other, (The network)
   protect_from_forgery;
+  
+  before_filter :reset_title;
   
   def self.requires_authentication(opts={}, &block)
     user = opts.delete(:user) || opts.delete(:for);
@@ -82,30 +83,43 @@ class ApplicationController < ActionController::Base
   
   helper_method :logged_in?, :current_user, :current_profile;
   
-  def self.title(name, opts={})
-    @@title = name;
-    @@title_frozen = opts.fetch(:freeze, false);
-  end
-  
-  def self.title_frozen?
-    (class_variable_defined?(:@@title_frozen)) ? @@title_frozen : false;
-  end
-  
-  def title(name=nil, opts={})
+  # When have time, implement this to accept a block and with capture, takes its content
+  # and sets it to the h1, still holdng the *name* for the page title in browser
+  def self.title(name=nil, opts={})
     if name.kind_of?(Hash)
       opts = name;
       name = nil;
     end
-    @@title = name.to_s if name and not self.class.title_frozen?;
-    @@title_frozen = true if opts.delete(:freeze);
-    result = (title?) ? @@title : "";
-    (title?) ? (opts.fetch(:prefix, "") + result + opts.fetch(:suffix, "")) : "";
+    @title = name if name and not title_frozen?;
+    @title_frozen = true if opts.delete(:freeze);
+    (title?) ? (opts.fetch(:prefix, "") + @title + opts.fetch(:suffix, "")) : "";
   end
   
-  def title?
-    self.class.send :class_variable_defined?, :@@title;
+  def self.title_frozen?
+    !!@title_frozen;
+  end
+  
+  def self.unfreeze
+    @title_frozen = false;
+  end
+  
+  def self.title?
+    @title.present?;
+  end
+  
+  def title(*args)
+    self.class.title(*args);
+  end
+  
+  def title?(*args)
+    self.class.title?(*args);
   end
   
   helper_method :title, :title?;
+  
+  def reset_title
+    title "";
+    self.class.unfreeze;
+  end
   
 end
