@@ -23,6 +23,11 @@ module ApplicationHelper
     end
   end  
   
+  # Comment this if you have browser's compatibility problems
+  def submit_tag(*args, &block)
+    button_tag(*args, &block);
+  end
+  
   def form_actions(opts={})
     submit = opts.delete(:submit) || "Submeter";
     reset = opts.delete(:reset) || "Resetar";
