@@ -1,10 +1,12 @@
 class Visibility < ActiveRecord::Base
+  Main = [:public, :private];
+  
   has_many :consumer_salesperson_relationships;
   
   validates_presence_of :name;
   validates :symbol, presence: true, uniqueness: true;
   
-  [:public, :private].each do |code|
+  Main.each do |code|
     define_singleton_method(code){first(:conditions => {symbol: code.to_s});};
     define_method(code.to_s + "?"){symbol == code;}; 
   end

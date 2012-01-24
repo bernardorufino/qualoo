@@ -1,0 +1,3 @@
+<% title "Meus clientes" %>
+<%= render :partial => "salespeople/relationships", :locals => {relationships: @relationships} %>
+<p><%= icon "group_add" %> <%= link_to "Escolha um cliente", consumers_path %> para torna-lo <u>seu</u> cliente.</p>

@@ -27,6 +27,13 @@ class User < ActiveRecord::Base
   scope :salespeople, where(profile_type: "Salesperson");
   scope :consumers, where(profile_type: "Consumer");
   
+  def self.search(query)
+    where([
+      "first_name LIKE :query OR last_name LIKE :query", 
+      {query: "%#{query}%"}
+    ]); 
+  end
+  
   def self.find_by_profile(profile_type)
     profile_type = profile_type.to_s.classify;
     return all unless profile_type?(profile_type);
@@ -62,6 +69,9 @@ class User < ActiveRecord::Base
   def authentic?(password)
     password_hash == encrypt(password);
   end
+  
+  def consumer?; profile?(:consumer); end
+  def salesperson?; profile?(:salesperson); end
   
   protected
   def set_profile

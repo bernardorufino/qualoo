@@ -1,0 +1,27 @@
+<table>
+	<!--<caption>Rede de negócios</caption>-->
+	<thead>
+		<tr>
+			<th>Nome</th>
+			<th>Visibilidade</th>
+			<th>Ações</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% for r in relationships %>
+		<tr>
+			<td><%= user_icon r.target %> <%= link_to r.target.name, user_path(r.target) %></td>
+			<td>
+				<%= form_for r, :html => {:class => "inline"} do |f|  %>
+					<%= f.select :visibility_id, options_for_select(visibilities, r.visibility.id) %>
+					<%= submit_tag icon("accept") %>
+				<% end %>
+			</td>
+			<td class="centralized">
+				<%= link_to icon("delete", :alt => "Excluir"), consumer_salesperson_relationship_path(r), 
+			        :confirm => "#{r.target.name} sera removido(a) de sua rede.", :method => :delete %>
+			</td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>

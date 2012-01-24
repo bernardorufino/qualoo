@@ -2,6 +2,16 @@ module ApplicationHelper
   include EmbedFormHelper;
   include FieldSetHelper;
   
+  def search_buffer
+    return @search if @search;
+    if session[:search]
+      params = session.delete(:search);
+    else
+      params = {:query => nil, :location => nil};
+    end
+    @search = Search.new(params);      
+  end
+  
   def main(opts={}, &content)
     main = capture(&content);
     opts.merge!(:class => "with-sidebar") if @sidebar and not @hide_sidebar;
@@ -34,6 +44,8 @@ module ApplicationHelper
     end
     fields.join("\n").html_safe;
   end
+  
+  form_helper :hidden_fields;
   
   def flash_msgs(prefix="flash-")
     flash.to_a.inject("".html_safe) do |code, (type, msg)|

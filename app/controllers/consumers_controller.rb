@@ -1,4 +1,16 @@
 class ConsumersController < ApplicationController
+  before_filter :check_manage, only: [:index];
+  
+  
+  def search
+    @users = Consumer.search(params[:query]);
+    title "Pesquisa de #{friendly_profile_name(:consumer, plural: true).downcase} por \"#{params[:query]}\"", :freeze => true;
+    render "users/index";
+  end
+  
+  def manage
+    @relationships = current_profile.relationships;
+  end 
   
   def index  
     @users = Consumer.all;
@@ -9,5 +21,15 @@ class ConsumersController < ApplicationController
   def show
     @consumer = Consumer.find(params[:id]);
   end
+  
+  protected
+  def check_manage
+    if params[:salesperson_id]
+      manage;
+      render :action => :manage;
+      false;
+    else true; end
+  end
+    
   
 end

@@ -1,5 +1,13 @@
 <% title @consumer.name %>
-<%= render "actions", :user => @consumer %>
-<%= icon "email" %> <%= mail_to @consumer.email %><br />
+<% sidebar do %>
+	<%= render "sidebar", profile: @consumer %>
+<% end %>
 
-<%= user_icon @consumer %> <%= friendly_profile_name @consumer %>
+<%= render "actions", profile: @consumer %>
+
+<h3>Rede de negócios</h3>
+<% if @consumer.network.any? %>
+	<%= render :partial => "users/list", :locals => {users: @consumer.network, id: "salespeople"} %>
+<% else %>
+	<p><%= @consumer.name %> não possui ninguém em sua rede pública.</p>
+<% end %>

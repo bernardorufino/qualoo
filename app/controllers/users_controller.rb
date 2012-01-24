@@ -1,6 +1,12 @@
 class UsersController < ApplicationController  
   requires_authentication only: [:edit, :update];
   
+  def search
+    @users = User.search(params[:query]);
+    title "Pesquisa de usuarios por \"#{params[:query]}\"", :freeze => true;
+    render "index";
+  end
+  
   def index
     @users = User.all;
   end

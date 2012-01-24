@@ -6,6 +6,11 @@ class ConsumerSalespersonRelationship < ActiveRecord::Base
   validates :owner_type, presence: true, 
                          uniqueness: {scope: [:consumer_id, :salesperson_id]};
   
+  def self.between(owner, target)
+    # TODO: Optimize using queries
+    owner.relationships.detect{|r| r.target == target};
+  end
+  
   # A finder which finds the relationships between salespeople and consumers from certain consumer
   # or salesperson, determined by hash-like argument or an object, with the additional parameter
   # :owner, that, when defined, restricts the search to those relationships which the object
@@ -51,5 +56,11 @@ class ConsumerSalespersonRelationship < ActiveRecord::Base
   def target
     send(owner.relates_with.downcase);
   end
+  
+  Visibility::Main.each do |v|
+    define_method(v.to_s + "!"){self.visibility = Visibility.send(v); self.save;}; 
+  end
+  
+  delegate *Visibility::Main.map{|v| v.to_s + "?"}, to: :visibility;
   
 end

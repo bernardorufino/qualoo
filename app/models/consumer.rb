@@ -1,8 +1,9 @@
 class Consumer < ActiveRecord::Base
   include ChildBehavior;
+  include Profile;
   
   is_one :user, as: :profile;
-  has_many :consumer_salesperson_relationships;
+  has_many :consumer_salesperson_relationships, conditions: {owner_type: "Consumer"};
   has_many :salespeople, through: :consumer_salesperson_relationships;
 
   def relates_with
@@ -11,6 +12,10 @@ class Consumer < ActiveRecord::Base
   
   def relates_with?(salesperson)
     salespeople.include?(salesperson);
+  end
+  
+  def network
+    relationships.select(&:public?).map(&:salesperson);
   end
   
 end

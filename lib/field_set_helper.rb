@@ -13,7 +13,7 @@ module FieldSetHelper
         record = instance_variable_get("@#{object_name}");
         if input.to_sym == :password_field and record
           value = record.send(attribute);
-          this_opts.merge!(:value => value) if value.present?;
+          this_opts.merge!(:value => value) if value.present?; 
         end
       end
       input = send(input, object_name, attribute, this_opts.merge(opts.delete(:input) || {}));

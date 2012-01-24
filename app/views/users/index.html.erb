@@ -1,6 +1,2 @@
 <% title "Usuarios" %>
-<ul id="users">
-<% for user in @users %>
-	<li><%= user_icon(user) %> <%= link_to user.name, user_path(user) %>
-<% end %>
-</ul>
+<%= render :partial => "users/list", :locals => {users: @users, id: "users"} %>

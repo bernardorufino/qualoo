@@ -1,19 +1,32 @@
 Qualoo::Application.routes.draw do
+  # Reedited not to use shallow because if used we have to declare twice,
+  # AND one of the declaration brokes, avoiding us to define the search method
+  
+  
   root :to => "pages#welcome";
-  resources :users, :consumer_salesperson_relationships;
-  # 2 resources below allow filter index action by salesperson/consumer, 
-  # allowing network (social app) support. Not used yet.
-  resources :salespeople, shallow: true do
-    resources :consumers;
+  
+  resources :consumer_salesperson_relationships;
+  
+  resources :users do
+    get "search", on: :collection;
   end
-  resources :consumers, shallow: true do
-    resources :salespeople;
+  
+  CRUD = [:show, :edit, :update, :destroy];
+  
+  resources :salespeople do
+    resources :consumers, except: CRUD;
+    get "search", on: :collection;
   end
-  resource :session;
+  resources :consumers do
+    resources :salespeople, except: CRUD;
+    get "search", on: :collection;    
+  end;
+  
+  resource :session, :search;
+  
   match "login" => "sessions#new", :as => :login;
   match "logout" => "sessions#destroy", :as => :logout;
   match "page/:action", :controller => "pages", :as => :page;
-  
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

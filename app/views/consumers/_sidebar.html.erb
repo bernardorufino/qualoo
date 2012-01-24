@@ -1,0 +1,11 @@
+<p class="profile-picture">
+	<%= image_tag "http://fakeimage.heroku.com/100x120?textcolor=!FFFFFF", 
+    	:alt => profile.name,
+    	:width => 100,
+    	:height => 120,
+    	:class => "profile-picture" %>
+</p>
+<p>
+	<%= icon "email" %> <%= mail_to profile.email %><br />
+	<%= user_icon profile %> <%= friendly_profile_name profile %>
+</p>

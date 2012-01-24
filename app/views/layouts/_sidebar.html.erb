@@ -1,9 +1,9 @@
-
 <h2>Pesquisa</h2>
-
-<%= form_tag root_path do %>
-	<%= text_field_tag :value %>
-	<%= submit_tag "Go" %>
+<%= form_tag search_path do %>
+	<%= text_field :search, :query, :class => "large", :value => search_buffer.query %>
+	<%= select :search, :location, options_for_select(Search.locations, search_buffer.location)  %>
+	
+	<%= submit_tag icon("magnifier") %>
 <% end %>
 
 <h2>Marcas</h2>

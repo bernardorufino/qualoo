@@ -1,5 +1,12 @@
 module GlobalHelper
   protected
+  def manage_relationships_path
+    send({
+      :salesperson => :salesperson_consumers_path,
+      :consumer => :consumer_salespeople_path
+    }[to_profile_sym(current_profile)], current_profile);
+  end
+  
   def friendly_name(name, map, opts={})
     pick = (opts.fetch(:plural, false)) ? 1 : 0;
     prefix = opts.delete(:prefix) || "";

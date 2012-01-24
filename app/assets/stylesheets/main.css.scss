@@ -137,6 +137,9 @@ $sidebar-bg-color: $shadow-bg-color;
 			border-top: none;
 		}
 	}
+	h3, h4, h5, h6 {
+		margin-top: 5px;	
+	}
 	h3, h4 {
 		color: lighten($light-color, 2%);
 	}
@@ -146,7 +149,7 @@ $sidebar-bg-color: $shadow-bg-color;
 }
 .title-actions {
 	margin-top: -($main-spacing + 15px);
-	margin-bottom: 9px;
+	margin-bottom: 14px;
 	position: relative;
 	left: 10px;
 	text-align: right;
@@ -230,12 +233,6 @@ $error-color: #9F0B0F;
 
 // SAMPLE TAG AND USE
 
-ul.inline {
-	li {
-		display: inline;
-	}
-}
-
 $label-width: 150px;
 $tiny-form-width: 220px;
 $tiny-label-width: 50px;
@@ -245,9 +242,20 @@ $large-form-width: 600px;
 $trailing-width: 15px;
 $sized-inputs: "input[type=text], input[type=password], textarea";
 $link-color: #0000EE;
+$button: "button, input[type=submit], input[type=reset]";
 
+
+.centralized {
+	text-align: center;
+}
+
+ul.inline {
+	li {
+		display: inline;
+	}
+}
 img.icon {
-	vertical-align: middle;
+	vertical-align: top;
 }
 img[src="#{image_path('icons/email.png')}"] {
 	top: 4px;
@@ -290,9 +298,26 @@ form.large {
 	}
 }
 form {
-	&.answer, &.answer * {
-		width: auto;
-		display: inline;
+	$form-detail-color: lighten($shadow-color, 10%);
+	$form-padding: 8px;
+	padding: 0 $form-padding $form-padding $form-padding;
+	&.inline, &.answer {
+		&, * {
+			text-align: center;
+			width: auto;
+			display: inline;
+		}
+		option {
+			display: block;
+		}
+		#{$button} {
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
+	&.asnwer p {
+		padding: 0;
+		margin: 0;
 	}
 	input[type=checkbox], input[type=radio] {
 		margin-left: 0px;
@@ -324,13 +349,16 @@ form {
 		margin-left: $label-width + 6px;
 		padding: 3px 0px 2px 0px;
 	}
+	$actions-bottom-border-thickness: 1px;
 	.actions {
-		border-top: 1px solid $shadow-color;
-		padding: 5px;
-		margin-top: 8px;
+		border: 1px solid $shadow-color;
+		border-bottom-width: $actions-bottom-border-thickness;
+		padding: $form-padding 8px $form-padding $form-padding;
+		// 1px because of the border
+		margin: -($form-padding + 1px);
+		margin-top: $form-padding + 2px;
 		text-align: right;
-		margin-right: 3px;
-		background-color: $shadow-bg-color;
+		background-color: $form-detail-color;
 		input {
 			width: auto;
 		}
@@ -338,26 +366,63 @@ form {
 	// last-child ass classes here as a hack for IE, see javascripts/application.js
 	// Need separated rule because IE doest parse rules when there is one it doesnt support in the same line
 	&.last-child .actions.last-child {
-		margin-bottom: -$main-spacing;
+		margin-bottom: -(($main-spacing / 2) + $actions-bottom-border-thickness + $form-padding);
 	}
 	&:last-child .actions:last-child {
-		margin-bottom: -$main-spacing;
+		margin-bottom: -(($main-spacing / 2) + $actions-bottom-border-thickness + $form-padding);
 	}
 }
 #sidebar {
 	form {
+		padding: 2px 0 0 0;
 		text-align: center;
 		width: auto;
 		* {
 			display: inline;
 			width: auto;
 		}
+		option {
+			display: block;
+		}
 	}
 	#{$sized-inputs} {
-		width: 0.6 * $sidebar_width;
+		width: 0.6 * $sidebar-width;
+		&.large {
+			width: 0.78 * $sidebar-width;
+		}
+	}
+	.profile-picture {
+		text-align: center;
 	}
 }
 
+table {
+	margin: 0 0 10px 0;
+	border-collapse: collapse;
+	&, td, th {
+		border: 2px solid $bg-color;
+	}
+	td, th {
+		padding: 3px 5px;
+		background-color: $shadow-bg-color;
+	}
+	thead {
+		cursor: default;
+	}
+	tbody tr:hover {
+		td, th {
+			&, a {
+				color: $bg-color;
+			}
+			a:hover, a:active {
+				color: $shadow-bg-color;
+				
+			}
+			background-color: $main-color;
+		}	
+	}
+	
+}
 
 
 

@@ -1,9 +1,10 @@
 class ConsumerSalespersonRelationshipsController < ApplicationController
   requires_authentication
-  before_filter :check_data, only: [:create];
+  #before_filter :check_data, only: [:create];
   
   
   def new
+    @relationship = ConsumerSalespersonRelationship.new;
     @user = to_profile(current_profile.relates_with).find(params[:id]);
     @consumer = pick_consumer(current_user, @user);
     @salesperson = pick_salesperson(current_user, @user);
@@ -20,11 +21,24 @@ class ConsumerSalespersonRelationshipsController < ApplicationController
     end
   end
   
-  protected
-  def check_data
-    
+  def update
+    @relationship = ConsumerSalespersonRelationship.find(params[:id]);
+    if @relationship.update_attributes(params[:consumer_salesperson_relationship])
+      flash[:notice] = "Dados atualizados com sucesso!";
+    else
+      flash[:error] = "Erro ao atualizar dados."
+    end
+    redirect_to :back;
   end
   
+  def destroy
+    @relationship = ConsumerSalespersonRelationship.find(params[:id]);
+    @relationship.destroy;
+    flash[:info] = "#{@relationship.target.name} removido(a) da sua rede.";
+    redirect_to :back;
+  end
+  
+  protected
   def pick_target(*args)
     args.flatten.reject{|u| u.profile == current_user.profile}.first;
   end
