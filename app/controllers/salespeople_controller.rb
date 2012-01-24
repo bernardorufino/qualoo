@@ -1,4 +1,5 @@
 class SalespeopleController < ApplicationController
+  requires_authentication only: :manage;
   before_filter :check_manage, only: [:index];
    
   def search

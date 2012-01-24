@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :received_messages, class_name: "Message", foreign_key: :recipient_id;
   has_many :measurements_received, class_name: "Measurement", foreign_key: :measured_id;
   has_many :likes;
+  has_many :tags;
   
   attr_accessor :password;
   

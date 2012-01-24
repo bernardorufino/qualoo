@@ -1,9 +1,36 @@
+<% if tags_manager %>
+
+	<% if current_user.tags.map(&:name).join("").size > 5 * 4 %>
+		<% no_sidebar %>
+	<% end %>
+	
+	<div id="tags">
+		<p>
+		<% for tag in current_user.tags %>
+			<%= link_to tag.name, tag_consumer_salesperson_relationships_path(tag) %>
+			<%= link_to icon("delete"), tag_path(tag), :method => :delete %>&nbsp;
+		<% end %>
+		</p>
+		<%= form_for Tag.new, :html => {:class => :inline} do |f| %>
+			<% if current_user.tags.empty? %>
+				<%= f.label :name, "Nova Tag" %>&nbsp;
+			<% end %>
+			<%= f.text_field :name %>
+			<%= submit_tag icon("add") %>
+		<% end %>
+	</div>
+
+<% end %>
+
 <table>
 	<!--<caption>Rede de negócios</caption>-->
 	<thead>
 		<tr>
 			<th>Nome</th>
 			<th>Visibilidade</th>
+			<% if current_user.tags.any? %>
+				<th>Tags</th>
+			<% end %>
 			<th>Ações</th>
 		</tr>
 	</thead>
@@ -17,6 +44,20 @@
 					<%= submit_tag icon("accept") %>
 				<% end %>
 			</td>
+			<% if current_user.tags.any? %>
+				<td>
+					<%= form_for r, :html => {:class => "inline"} do |f| %>
+						<% for tag in current_user.tags %>			
+							<span>
+							<%= label_tag dom_id(tag, dom_id(r)), tag.name, :class => :before %>
+							<%= check_box_tag "consumer_salesperson_relationship[tag_ids][]" , tag.id,
+							    r.tag?(tag), :id => dom_id(tag, dom_id(r)) %>
+							</span>
+						<% end %>
+						<%= submit_tag icon("accept") %>
+					<% end %>
+				</td>
+			<% end %>
 			<td class="centralized">
 				<%= link_to icon("delete", :alt => "Excluir"), consumer_salesperson_relationship_path(r), 
 			        :confirm => "#{r.target.name} sera removido(a) de sua rede.", :method => :delete %>

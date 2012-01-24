@@ -1,7 +1,13 @@
 class Tag < ActiveRecord::Base
-  has_many :relationship_taggings;
+  belongs_to :user;
+  has_many :relationship_taggings, dependent: :destroy;
   has_many :consumer_salesperson_relationships, through: :relationship_taggings;
 
-  validates_presence_of :name;
+  validates :name, presence: true,
+                   uniqueness: {scope: :user_id};
+
+  def relationships
+    consumer_salesperson_relationships;
+  end
 
 end

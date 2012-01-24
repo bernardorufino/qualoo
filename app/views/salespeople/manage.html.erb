@@ -1,3 +1,3 @@
 <% title "Minha rede de negocios" %>
-<%= render "relationships", relationships: @relationships %>
+<%= render "relationships", relationships: @relationships, tags_manager: true %>
 <p><%= icon "group_add" %> <%= link_to "Escolha um revendedor", salespeople_path %> para adicioná-lo a sua rede.</p>

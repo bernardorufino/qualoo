@@ -3,7 +3,13 @@
 # Consumer.all.reject(&:user).each(&:destroy)
 # Salesperson.all.reject(&:user).each(&:destroy)
 class ApplicationController < ActionController::Base
-  # TODO: Show users and salespeople relationed to each other, (The network)
+  # TODO: Fix browsers compatibility
+  # TODO: Add tags to the network
+  # TODO: Check the owner of resources as the current_user in ALL controllers
+  # TODO: When default listing salespeople and consumers, check if current_user has him
+  # and say that in the list, as well as the tag under which he has it
+  # TODO: Separete by tags listings
+  
   protect_from_forgery;
   
   before_filter :reset_title;

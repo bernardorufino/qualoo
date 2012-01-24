@@ -2,6 +2,8 @@ class ConsumerSalespersonRelationship < ActiveRecord::Base
   belongs_to :consumer;
   belongs_to :salesperson;
   belongs_to :visibility;
+  has_many :relationship_taggings;
+  has_many :tags, through: :relationship_taggings;
   
   validates :owner_type, presence: true, 
                          uniqueness: {scope: [:consumer_id, :salesperson_id]};
@@ -47,6 +49,10 @@ class ConsumerSalespersonRelationship < ActiveRecord::Base
     results = results.where :owner_type => type if opts[:owner];
     results = results.where ["owner_type <> ?", type] if opts[:owner] == false;
     results;
+  end
+  
+  def tag?(tag)
+    tags.include?(tag);
   end
   
   def owner

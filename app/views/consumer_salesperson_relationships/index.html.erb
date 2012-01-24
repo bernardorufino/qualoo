@@ -1,0 +1,3 @@
+<% title @tag.name %>
+<p><%= icon "tag_blue" %> <%= link_to "Gerenciar tags", manage_relationships_path %></p>
+<%= render :partial => "salespeople/relationships", :locals => {relationships: @relationships, tags_manager: false} %>

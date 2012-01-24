@@ -205,6 +205,9 @@ $error-color: #9F0B0F;
         background-repeat: no-repeat;
         background-position: 5px 50%;
         border: 2px solid #FFFFFF;
+        &:first-child {
+        	margin-top: 15px - ($main-spacing / 2);
+        }
 }
 .flash-notice {
         color: #1F781B;
@@ -244,7 +247,19 @@ $sized-inputs: "input[type=text], input[type=password], textarea";
 $link-color: #0000EE;
 $button: "button, input[type=submit], input[type=reset]";
 
-
+.zero {
+	margin: 0;
+	padding: 0;
+	width: auto;
+}
+.inline {
+	display: inline;
+	.icon {
+		vertical-align: middle;
+		position: relative;
+		bottom: 1px;
+	}
+}
 .centralized {
 	text-align: center;
 }
@@ -302,10 +317,25 @@ form {
 	$form-padding: 8px;
 	padding: 0 $form-padding $form-padding $form-padding;
 	&.inline, &.answer {
+		text-align: center;
+		padding: 0;
+		label {
+			margin-top: 4px;
+			padding: 0 4px 0 4px 0;
+			&.before {
+				padding-left: 0;
+			}
+			&.after {
+				padding-right: 0;
+			}
+		}
 		&, * {
-			text-align: center;
 			width: auto;
 			display: inline;
+		}
+		#{$sized-inputs} {
+			width: 75px;
+			text-align: left;
 		}
 		option {
 			display: block;
@@ -423,8 +453,13 @@ table {
 	}
 	
 }
-
-
+#tags {
+	margin-bottom: 8px;
+}
+#tags p {
+	@extend .inline;
+	@extend .zero;
+}
 
 
 

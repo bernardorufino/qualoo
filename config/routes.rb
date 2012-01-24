@@ -5,7 +5,11 @@ Qualoo::Application.routes.draw do
   
   root :to => "pages#welcome";
   
-  resources :consumer_salesperson_relationships;
+  resources :consumer_salesperson_relationships;  
+  
+  resources :tags do
+    resources :consumer_salesperson_relationships, except: CRUD;
+  end
   
   resources :users do
     get "search", on: :collection;
@@ -17,6 +21,7 @@ Qualoo::Application.routes.draw do
     resources :consumers, except: CRUD;
     get "search", on: :collection;
   end
+  
   resources :consumers do
     resources :salespeople, except: CRUD;
     get "search", on: :collection;    
