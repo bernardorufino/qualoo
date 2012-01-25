@@ -22,6 +22,10 @@ class ConsumersController < ApplicationController
     @consumer = Consumer.find(params[:id]);
   end
   
+  def new
+    welcome_user;
+  end
+  
   protected
   def check_manage
     if params[:salesperson_id]

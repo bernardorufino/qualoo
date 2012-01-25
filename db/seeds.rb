@@ -10,6 +10,17 @@ Visibility.create name: "Publico", symbol: :public, description: "Todos podem ve
 Visibility.create name: "Privado", symbol: :private, description: "So logados podem ver";
 
 Company.create(%w(Avon Jequiti Herbalife Natura Boticario).map{|name| {name: name}});
+Category.create(%w(Cosmeticos Higiene Alimenticio).map{|name| {name: name}})
+{
+  1 => [1, 2],
+  2 => [1],
+  3 => [3],
+  4 => [1, 2],
+  5 => [1]
+}.to_a.each do |(company_id, category_ids)|
+  Company.find(company_id).update_attributes(category_ids: category_ids);
+end
+  
 
 # Comment below when done
 Consumer.create([{

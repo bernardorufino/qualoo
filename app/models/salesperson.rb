@@ -20,5 +20,9 @@ class Salesperson < ActiveRecord::Base
   def custumers
     relationships.select(&:public?).map(&:consumer);
   end
-  
+
+  def from?(company)
+    companies.include?(company);
+  end
+
 end

@@ -3,12 +3,12 @@
 # Consumer.all.reject(&:user).each(&:destroy)
 # Salesperson.all.reject(&:user).each(&:destroy)
 class ApplicationController < ActionController::Base
-  # TODO: OK Tags added to the network
-  # TODO: OK Check the owner of resources as the current_user in ALL controllers
-  # TODO: OK When default listing salespeople and consumers, check if current_user has him
-  # and say that in the list, as well as the tag under which he has it
-  # TODO: OK Separete by tags listings
+  # TODO: OK Implement companies controller!
+  # TODO: OK Implement categories controller!
+  # TODO: DRY in companies/index and categories/show
+  # TODO: Check to_sentence method to write in portuguese by default with /lib/array.rb, in companies_helper 
   # TODO: DRY and refactorate: Eliminate current_profile and makes current_user act as current_profile
+  # TODO: Unify icons for resources
   
   protect_from_forgery;
   
@@ -24,6 +24,11 @@ class ApplicationController < ActionController::Base
   end
   
   protected
+  def welcome_user
+    flash[:notice] = "Bem vindo, #{current_profile.first_name}!";
+    redirect_to page_path(:dashboard);
+  end
+  
   def user_path(user, *args)
     user = User.find(user) if user.kind_of?(Fixnum);
     if user.profile
@@ -42,15 +47,17 @@ class ApplicationController < ActionController::Base
   def authenticate(opts={})
     if not logged_in?
       return access_denied(opts.merge(denial: :identity));
-    elsif opts[:profile_type] and not current_user.profile?(opts[:profile_type])
+    elsif User.profile_type?(opts[:profile_type]) and not current_user.profile?(opts[:profile_type])
       return access_denied(opts.merge(denial: :role));      
+    elsif opts[:profile_type] == :admin and not current_user.admin?
+      return access_denied(opts.merge(denial: :role));
     end
     true;
   end
   
   def access_denied(opts)
     if opts[:denial] == :identity
-      if opts[:profile_type]
+      if User.profile_type?(opts[:profile_type])
         flash[:alert] = "Efetue login como #{friendly_profile_name(opts[:profile_type]).downcase} para acessar esse recurso.";
       else
         flash[:alert] = "Efetue login para acessar esse recurso.";

@@ -1,0 +1,13 @@
+<%= form_for @salesperson, :method => salesperson_form_method, :url => salesperson_form_url do |f| %>
+
+	<%= f.field_set :company_ids, "Represento as marcas: " do %>
+		<% for company in Company.all %> 
+			<%= label_tag dom_id(company), company.name %>
+			<%= check_box_tag "salesperson[company_ids][]", company.id, @salesperson.from?(company),
+			    :id => dom_id(company) %>
+		<% end %>
+	<% end %>
+	
+	<%= form_actions :submit => submit, :reset => reset %>
+
+<% end %>

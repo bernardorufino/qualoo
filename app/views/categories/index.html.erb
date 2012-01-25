@@ -1,0 +1,6 @@
+<% title "Generos" %>
+<ul id="categories">
+	<% for category in @categories %>
+		<li><%= icon "flag_blue" %> <%= link_to category.name, category_path(category) %></li>
+	<% end %>
+</ul>

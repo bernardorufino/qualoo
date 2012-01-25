@@ -9,7 +9,7 @@ class Search
       friendly_profile_name(:salesperson, plural: true) => "salespeople",
       "Usuarios" => "users",
       "Marcas" => "companies",
-      "Categoria" => "categories"      
+      "Generos" => "categories"      
     };
   end
   

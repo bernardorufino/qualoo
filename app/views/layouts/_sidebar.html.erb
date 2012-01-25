@@ -8,7 +8,7 @@
 
 <h2>Marcas</h2>
 <ul>
-<% for brand in Company.all %>
-	<li><%= brand.name %></li>
+<% for company in Company.all %>
+	<li><%= icon "shield" %> <%= link_to company.name, company_path(company) %></li>
 <% end %>
 </ul>

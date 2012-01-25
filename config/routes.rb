@@ -12,6 +12,14 @@ Qualoo::Application.routes.draw do
     resources :consumer_salesperson_relationships, except: CRUD;
   end
   
+  resources :companies do
+    get "search", on: :collection;
+  end
+  
+  resources :categories do
+    get "search", on: :collection;
+  end
+  
   resources :users do
     get "search", on: :collection;
   end

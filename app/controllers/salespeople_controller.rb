@@ -22,6 +22,37 @@ class SalespeopleController < ApplicationController
     @salesperson = Salesperson.find(params[:id]);
   end
   
+  def edit
+    @salesperson = current_profile;
+  end
+  
+  def new
+    flash.now[:info] = "Quase pronto! So falta preencher os dados abaixo."
+    edit;
+  end
+  
+  def create
+    @salesperson = current_profile;
+    if @salesperson.update_attributes(params[:salesperson])
+      welcome_user;
+    else
+      flash[:error] = "Erro ao cadastrar revendedora.";
+      render :action => :new;
+    end
+  end
+  
+  def update
+    @salesperson = current_profile;
+    if @salesperson.update_attributes(params[:salesperson])
+      flash[:notice] = "Dados atualizados com sucesso!";
+      redirect_to page_path(:dashboard);
+    else
+      flash[:error] = "Erro ao atualizar dados.";
+      render :action => :edit;
+    end
+  end
+  
+  
   protected
   def check_manage
     if params[:consumer_id]

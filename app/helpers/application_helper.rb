@@ -59,11 +59,11 @@ module ApplicationHelper
   end
   
   def form_actions(opts={})
-    submit = opts.delete(:submit) || "Submeter";
-    reset = opts.delete(:reset) || "Resetar";
+    submit = opts.key?(:submit) ? opts.delete(:submit) : "Submeter";
+    reset = opts.key?(:reset) ? opts.delete(:reset) : "Resetar";
     submit = (submit) ? submit_tag(submit) : "";
     reset = (reset) ? submit_tag(reset, :type => "reset") : "";
-    content_tag(opts.delete(:tag) || :p,  reset + submit, {:class => "actions"}.merge(opts));
+    content_tag(opts.delete(:tag) || :p,  reset.html_safe + submit.html_safe, {:class => "actions"}.merge(opts));
   end
   
   # friendly_profile_name in ApplicationControlller ;)

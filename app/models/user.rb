@@ -74,6 +74,11 @@ class User < ActiveRecord::Base
   def consumer?; profile?(:consumer); end
   def salesperson?; profile?(:salesperson); end
   
+  # Implement something else!
+  def admin?
+    ["bermonruf@gmail.com", "rodolfo.pinotti@gmail.com"].include?(email);
+  end
+  
   protected
   def set_profile
     if new_record? and not profile

@@ -22,9 +22,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user]);
     if @user.save
-      flash[:notice] = "Bem vindo, #{@user.name}!";
       login_user(@user);
-      redirect_to page_path(:dashboard);
+      redirect_to send("new_#{to_profile_sym(@user)}_path");
     else
       flash.now[:error] = "Erro ao criar usuario. Atente para os campos destacados abaixo.";
       render :action => :new;
@@ -42,7 +41,7 @@ class UsersController < ApplicationController
       redirect_to edit_user_path(@user)
     else
       flash.now[:error] = "Erro ao atualizar dados. Atente para os campos destacados abaixo.";
-      render :action => :new;
+      render :action => :edit;
     end
   end
   

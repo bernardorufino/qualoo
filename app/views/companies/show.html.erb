@@ -1,0 +1,8 @@
+<% title @company.name %>
+<% sidebar do %>
+	<h2>Revendedores</h2>
+	<%= render :partial => "users/list", :locals => {users: @company.salespeople, id: "salespeople"} %>
+<% end %>
+<% if @company.categories.any? %>
+	<p><%= icon "flag_blue" %> <%= categories_sentence(@company.categories) %></p>
+<% end %>

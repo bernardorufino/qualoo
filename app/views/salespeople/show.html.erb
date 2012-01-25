@@ -1,6 +1,12 @@
 <% title @salesperson.name %>
 <% sidebar do %>
 	<%= render :partial => "consumers/sidebar", :locals => {profile: @salesperson} %>
+	<!--<p>Revendedor das marcas: </p>-->
+	<ul>
+		<% for company in @salesperson.companies %>
+			<li><%= icon "shield" %> <%= link_to company.name, company_path(company) %></li>
+		<% end %>
+	</ul>
 <% end %>
 
 <%= render :partial => "consumers/actions", :locals => {profile: @salesperson} %>
