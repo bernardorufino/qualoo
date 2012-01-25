@@ -9,7 +9,12 @@ module Profile
   end
   
   def relationship_with(target)
+    target = target.profile;
     (relates_with?(target)) ? ConsumerSalespersonRelationship.between(self, target) : nil;
+  end
+  
+  def new_target
+    send(to_profile_sym(relates_with, plural: true)).new;
   end
   
   module ClassMethods

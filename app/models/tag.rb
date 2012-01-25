@@ -9,5 +9,9 @@ class Tag < ActiveRecord::Base
   def relationships
     consumer_salesperson_relationships;
   end
+  
+  def targets
+    relationships.map(&:target);
+  end
 
 end

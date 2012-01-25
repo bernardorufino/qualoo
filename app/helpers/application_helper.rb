@@ -73,7 +73,34 @@ module ApplicationHelper
   end
   
   def user_icon(user)
-    icon({:consumer => "user", :salesperson => "user_suit"}[user.profile_type.downcase.to_sym]);
+    icon({
+      :consumer => "user", 
+      :salesperson => "user_red",
+      :network => "user_green"
+    }[classify_user(user)]);
+  end
+  
+  def user_class(user)
+    {
+      :consumer => "consumer", 
+      :salesperson => "salesperson",
+      :network => "user-network"
+    }[classify_user(user)];    
+  end
+  
+  def current_user_relates_with?(user)
+    logged_in? and current_profile.relates_with?(user.profile);
+  end
+  
+  def classify_user(user)
+    if user.respond_to?(:profile)
+      user = if(current_user_relates_with?(user) && !manage_relationships_path?)
+        :network
+      else
+        to_profile_sym(user);
+      end
+    end
+    user.to_sym;
   end
   
   protected

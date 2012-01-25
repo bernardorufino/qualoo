@@ -1,10 +1,14 @@
 module GlobalHelper
   protected
-  def manage_relationships_path
+  def manage_relationships_path(*args)
     send({
       :salesperson => :salesperson_consumers_path,
       :consumer => :consumer_salespeople_path
-    }[to_profile_sym(current_profile)], current_profile);
+    }[to_profile_sym(current_profile)], current_profile, *args);
+  end
+  
+  def manage_relationships_path?(*args)
+    manage_relationships_path(*args) == request.fullpath;
   end
   
   def friendly_name(name, map, opts={})
@@ -22,20 +26,21 @@ module GlobalHelper
     }, *args);
   end
   
-  def to_profile(obj)
-    try_profile_type(obj).to_s.classify.constantize;
+  def to_profile(obj, *args)
+    try_profile_type(obj, *args).to_s.classify.constantize;
   end
   
-  def to_profile_name(obj)
-    try_profile_type(obj).to_s.classify;
+  def to_profile_name(obj, *args)
+    try_profile_type(obj, *args).to_s.classify;
   end
   
-  def to_profile_sym(obj)
-    try_profile_type(obj).to_s.downcase.to_sym
+  def to_profile_sym(obj, *args)
+    try_profile_type(obj, *args).to_s.downcase.to_sym
   end
   
-  def try_profile_type(obj)
-    (obj.respond_to?(:profile_type)) ? obj.profile_type : obj;
+  def try_profile_type(obj, opts={})
+    obj = obj.profile_type if obj.respond_to?(:profile_type);
+    (opts.delete(:plural)) ? obj.pluralize : obj;
   end
   
 end

@@ -11,7 +11,7 @@ class Consumer < ActiveRecord::Base
   end
   
   def relates_with?(salesperson)
-    salespeople.include?(salesperson);
+    salespeople.include?(salesperson.try(:profile));
   end
   
   def network

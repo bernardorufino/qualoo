@@ -1,6 +1,33 @@
-<ul id="<%= id %>">
+<% manager = manager rescue false %>
+<% if logged_in? and users.any?{|u| current_profile.can_relate_with?(u)} and manager %>
+	<p><%= icon "group_edit" %> <%= link_to "Gerenciar minha rede", manage_relationships_path %></p>
+<% end %>
+
+<ul id="<%= id rescue nil %>">
 <% for user in users %>
-	<li><%= user_icon(user) %> <%= link_to user.name, user_path(user) %>
+	<li>
+		<%= user_icon(user) %> <%= link_to user.name, user_path(user), :class => user_class(user) %>
+		<% if logged_in? and current_profile.relates_with?(user) and manager %>
+			&nbsp;
+			<% for tag in current_profile.relationship_with(user).tags %>
+				<%= icon "tag_blue" %> <%= tag.name %> 
+			<% end %>
+		<% end %>
+	</li>
 <% end %>
 </ul>
 
+<% if manager %>
+	<p>Legenda</p>
+	<ul>
+		<% if users.any?(&:consumer?) %>
+			<li><%= user_icon :consumer %> <span class="<%= user_class :consumer %>">Cliente</span></li>
+		<% end %>	
+		<% if users.any?(&:salesperson?) %>
+		<li><%= user_icon :salesperson %> <span class="<%= user_class :salesperson %>">Revendedor</span></li>
+		<% end %>
+		<% if logged_in? and users.any?{|u| current_profile.relates_with?(u)} %>
+			<li><%= user_icon :network %> <span class="<%= user_class :network %>">Pertence à minha rede</span></li>
+		<% end %>
+	</ul>
+<% end %>

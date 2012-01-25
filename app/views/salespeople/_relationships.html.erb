@@ -1,3 +1,16 @@
+<% if tags_manager and current_profile.tags.any? %>
+	<% sidebar do %>
+		<% for tag in current_profile.tags %>
+			<h2><%= icon "tag_blue" %> <%= tag.name %></h2>
+			<% if tag.targets.any? %>
+				<%= render :partial => "users/list", :locals => {users: tag.targets} %>
+			<% else %>
+				<%= icon "page_white_horizontal" %> Tag vazia
+			<% end %>
+		<% end %>
+	<% end %>
+<% end %>
+
 <% if tags_manager %>
 
 	<% if current_user.tags.map(&:name).join("").size > 5 * 4 %>
@@ -22,47 +35,51 @@
 
 <% end %>
 
-<table>
-	<!--<caption>Rede de negócios</caption>-->
-	<thead>
-		<tr>
-			<th>Nome</th>
-			<th>Visibilidade</th>
-			<% if current_user.tags.any? %>
-				<th>Tags</th>
-			<% end %>
-			<th>Ações</th>
-		</tr>
-	</thead>
-	<tbody>
-		<% for r in relationships %>
-		<tr>
-			<td><%= user_icon r.target %> <%= link_to r.target.name, user_path(r.target) %></td>
-			<td>
-				<%= form_for r, :html => {:class => "inline"} do |f|  %>
-					<%= f.select :visibility_id, options_for_select(visibilities, r.visibility.id) %>
-					<%= submit_tag icon("accept") %>
+<% if relationships.any? %>
+	<table>
+		<!--<caption>Rede de negócios</caption>-->
+		<thead>
+			<tr>
+				<th>Nome</th>
+				<th>Visibilidade</th>
+				<% if current_user.tags.any? %>
+					<th>Tags</th>
 				<% end %>
-			</td>
-			<% if current_user.tags.any? %>
+				<th>Ações</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% for r in relationships %>
+			<tr>
+				<td><%= user_icon r.target %> <%= link_to r.target.name, user_path(r.target) %></td>
 				<td>
-					<%= form_for r, :html => {:class => "inline"} do |f| %>
-						<% for tag in current_user.tags %>			
-							<span>
-							<%= label_tag dom_id(tag, dom_id(r)), tag.name, :class => :before %>
-							<%= check_box_tag "consumer_salesperson_relationship[tag_ids][]" , tag.id,
-							    r.tag?(tag), :id => dom_id(tag, dom_id(r)) %>
-							</span>
-						<% end %>
+					<%= form_for r, :html => {:class => "inline"} do |f|  %>
+						<%= f.select :visibility_id, options_for_select(visibilities, r.visibility.id) %>
 						<%= submit_tag icon("accept") %>
 					<% end %>
 				</td>
+				<% if current_user.tags.any? %>
+					<td>
+						<%= form_for r, :html => {:class => "inline"} do |f| %>
+							<% for tag in current_user.tags %>			
+								<span>
+								<%= label_tag dom_id(tag, dom_id(r)), tag.name, :class => :before %>
+								<%= check_box_tag "consumer_salesperson_relationship[tag_ids][]" , tag.id,
+								    r.tag?(tag), :id => dom_id(tag, dom_id(r)) %>
+								</span>
+							<% end %>
+							<%= submit_tag icon("accept") %>
+						<% end %>
+					</td>
+				<% end %>
+				<td class="centralized">
+					<%= link_to icon("delete", :alt => "Excluir"), consumer_salesperson_relationship_path(r), 
+				        :confirm => "#{r.target.name} sera removido(a) de sua rede.", :method => :delete %>
+				</td>
+			</tr>
 			<% end %>
-			<td class="centralized">
-				<%= link_to icon("delete", :alt => "Excluir"), consumer_salesperson_relationship_path(r), 
-			        :confirm => "#{r.target.name} sera removido(a) de sua rede.", :method => :delete %>
-			</td>
-		</tr>
-		<% end %>
-	</tbody>
-</table>
+		</tbody>
+	</table>
+<% else %>
+	<p><%= icon "page_white_horizontal" %> Sua rede ainda está vazia</p>
+<% end %>

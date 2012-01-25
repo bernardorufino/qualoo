@@ -111,6 +111,9 @@ $sidebar-bg-color: $shadow-bg-color;
 	float: left;
 	border-right: $sidebar-content-divisory-border;
 	h2 {
+		.icon {
+			vertical-align: middle;
+		}
 		text-align: center;
 		background-color: $shadow-color;
 		padding: 8px 5px 6px 5px;
@@ -460,7 +463,12 @@ table {
 	@extend .inline;
 	@extend .zero;
 }
-
+.user-network {
+	text-decoration: underline;
+}
+ul {
+	margin-bottom: 10px;
+}
 
 
 

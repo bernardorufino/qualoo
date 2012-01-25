@@ -1,4 +1,4 @@
-class ConsumerSalespersonRelationshipsController < ApplicationController
+ class ConsumerSalespersonRelationshipsController < ApplicationController
   requires_authentication
   #before_filter :check_data, only: [:create];
   
@@ -8,7 +8,7 @@ class ConsumerSalespersonRelationshipsController < ApplicationController
   end
   
   def new
-    @relationship = ConsumerSalespersonRelationship.new;
+    @relationship = current_profile.relationships.new;
     @user = to_profile(current_profile.relates_with).find(params[:id]);
     @consumer = pick_consumer(current_user, @user);
     @salesperson = pick_salesperson(current_user, @user);
@@ -16,7 +16,7 @@ class ConsumerSalespersonRelationshipsController < ApplicationController
   
   def create
     # Check the owner as the current_user
-    @relationship = ConsumerSalespersonRelationship.new(params[:consumer_salesperson_relationship]);
+    @relationship = current_profile.relationships.new(params[:consumer_salesperson_relationship]);
     if @relationship.save
       flash[:notice] = "#{@relationship.target.name} foi adicionado a sua rede!";
       redirect_to user_path(@relationship.target);
@@ -28,7 +28,7 @@ class ConsumerSalespersonRelationshipsController < ApplicationController
   
   def update
     # Check the owner as the current_user
-    @relationship = ConsumerSalespersonRelationship.find(params[:id]);
+    @relationship = current_profile.relationships.find(params[:id]);
     if @relationship.update_attributes(params[:consumer_salesperson_relationship])
       flash[:notice] = "Dados atualizados com sucesso!";
     else
@@ -39,7 +39,7 @@ class ConsumerSalespersonRelationshipsController < ApplicationController
   
   def destroy
     # Check the owner as the current_user
-    @relationship = ConsumerSalespersonRelationship.find(params[:id]);
+    @relationship = current_profile.relationships.find(params[:id]);
     @relationship.destroy;
     flash[:info] = "#{@relationship.target.name} removido(a) da sua rede.";
     redirect_to :back;

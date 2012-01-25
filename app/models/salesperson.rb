@@ -14,7 +14,7 @@ class Salesperson < ActiveRecord::Base
   end
   
   def relates_with?(consumer)
-    consumers.include?(consumer);
+    consumers.include?(consumer.try(:profile));
   end
   
   def custumers

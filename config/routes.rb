@@ -2,6 +2,7 @@ Qualoo::Application.routes.draw do
   # Reedited not to use shallow because if used we have to declare twice,
   # AND one of the declaration brokes, avoiding us to define the search method
   
+  CRUD = [:show, :edit, :update, :destroy];
   
   root :to => "pages#welcome";
   
@@ -14,8 +15,6 @@ Qualoo::Application.routes.draw do
   resources :users do
     get "search", on: :collection;
   end
-  
-  CRUD = [:show, :edit, :update, :destroy];
   
   resources :salespeople do
     resources :consumers, except: CRUD;
