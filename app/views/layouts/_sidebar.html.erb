@@ -1,13 +1,13 @@
 <h2>Pesquisa</h2>
 <%= form_tag search_path do %>
 	<%= text_field :search, :query, :class => "large", :value => search_buffer.query %>
-	<%= select :search, :location, options_for_select(Search.locations, search_buffer.location)  %>
+	<%= select :search, :scope, options_for_select(search_scopes, search_buffer.scope)  %>
 	
 	<%= submit_tag icon("magnifier") %>
 <% end %>
 
 <h2>Marcas</h2>
-<ul>
+<ul class="resource-list">
 <% for company in Company.all %>
 	<li><%= icon "shield" %> <%= link_to company.name, company_path(company) %></li>
 <% end %>

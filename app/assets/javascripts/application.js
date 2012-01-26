@@ -7,8 +7,28 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+function resizeWindow(e){
+	var center = $("#nav, #main");
+	if($(window).width() < $("body").width()){
+		console.log("IF")
+		if($("#nav, #main").width() < $(window).width()){
+			$resized = true;
+			center.width(center.width());
+			center.css("margin-left", "auto").css("margin-right", "auto");
+			$("body").css("min-width", $(window).width()).width($(window).width());
+		}
+	} else if($resized){
+		$("body").width($(window).width());
+	}
+	
+}
+
 $(document).ready(function(){
 	// Some IE CSS hack ;)
 	$("body *:last-child").addClass("last-child")
-	
+	// If we can put the center inside the window, lets not user scrolling :)
+	$resized = false;
+	resizeWindow();
+	$(window).resize(resizeWindow);
 });

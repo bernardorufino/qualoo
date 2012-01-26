@@ -13,6 +13,7 @@ class ConsumerSalespersonRelationship < ActiveRecord::Base
     owner.relationships.detect{|r| r.target == target};
   end
   
+  # DEPRECATE!
   # A finder which finds the relationships between salespeople and consumers from certain consumer
   # or salesperson, determined by hash-like argument or an object, with the additional parameter
   # :owner, that, when defined, restricts the search to those relationships which the object

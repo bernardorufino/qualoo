@@ -7,13 +7,14 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class="<%= page %>">
 
 <div id="header">
 	<h1><%= link_to "Qualoo", root_path %></h1>
 	<ul id="main-actions">
 		<% if logged_in? %>
 			<li><%= link_to current_user.name, user_path(current_user) %></li>
+			<li><%= link_to "Mensagens", messages_path %></li>
 			<li><%= link_to "Dashboard", page_path(:dashboard) %></li>
 			<li><%= link_to "Logout", logout_path %></li>	
 		<% else %>

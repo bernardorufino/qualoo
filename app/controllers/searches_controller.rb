@@ -4,15 +4,12 @@ class SearchesController < ApplicationController
   
   def create
     @search = Search.new(params[:search]);
-    redirect_to @search.path;
+    redirect_to @search.route;
   end
   
   protected
   def buffer_fields
-    session[:search] = {
-      query: params[:search][:query],
-      location: params[:search][:location]
-    };
+    session[:search] = params[:search];
   end
   
 end

@@ -1,25 +1,21 @@
 class Search
   extend GlobalHelper;
   include GlobalHelper;
-  attr_accessor :query, :location;
-  
-  def self.locations
-    {
-      friendly_profile_name(:consumer, plural: true) => "consumers",
-      friendly_profile_name(:salesperson, plural: true) => "salespeople",
-      "Usuarios" => "users",
-      "Marcas" => "companies",
-      "Generos" => "categories"      
-    };
-  end
+  attr_accessor :query, :scope, :params;
   
   def initialize(params)
-    @query = params[:query];
-    @location = params[:location];
+    @params = params.clone;
+    @query = @params.delete(:query);
+    @scope = @params.delete(:scope);
   end
   
-  def path(opts={}, *args)
-    Rails.application.routes.url_helpers.send("search_#{@location}_path", {query: @query}.merge(opts), *args);
+  def route(opts={}, *args)
+    Rails.application.routes.url_helpers.send("search_#{@scope}_path", {query: @query}.merge(@params).merge(opts), *args);
+  end
+  
+  def method_missing(method, *args, &block)
+    return @params[method] if @params.key?(method)
+    super(method, *args, &block);
   end
   
 end

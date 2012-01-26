@@ -1,0 +1,2 @@
+<% title "Inbox #{unread_messages_header}" %>
+<%= render "list", messages: @messages, label: "folder", user_header: "De", user_column: :sender.to_proc %>

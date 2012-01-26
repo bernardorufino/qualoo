@@ -2,14 +2,23 @@ module ApplicationHelper
   include EmbedFormHelper;
   include FieldSetHelper;
   
+  def page(html_class=nil)
+    @html_class = html_class if html_class;
+    @html_class || "medium";
+  end
+  
   def search_buffer
-    return @search if @search;
-    if session[:search]
-      params = session.delete(:search);
-    else
-      params = {:query => nil, :location => nil};
-    end
-    @search = Search.new(params);      
+    @_search ||= Search.new(session[:search] || {});      
+  end
+  
+  def search_scopes
+    {
+      friendly_profile_name(:consumer, plural: true) => "consumers",
+      friendly_profile_name(:salesperson, plural: true) => "salespeople",
+      "Usuarios" => "users",
+      "Marcas" => "companies",
+      "Generos" => "categories"      
+    };
   end
   
   def main(opts={}, &content)
@@ -88,6 +97,11 @@ module ApplicationHelper
     }[classify_user(user)];    
   end
   
+  def user_name(user, path=nil)
+    path ||= user_path(user);
+    user_icon(user) + " " + link_to(user.name, path, :class => user_class(user));
+  end
+  
   def current_user_relates_with?(user)
     logged_in? and current_profile.relates_with?(user.profile);
   end
@@ -103,12 +117,9 @@ module ApplicationHelper
     user.to_sym;
   end
   
-  protected
-  class Debug < StandardError; end
-  
-  def debug(message)
-    raise Debug, message;
+  def parent_layout(layout)
+    @view_flow.set(:layout, output_buffer);
+    self.output_buffer = render(file: "layouts/#{layout}");
   end
-  
 end
 

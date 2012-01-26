@@ -1,0 +1,32 @@
+<% if messages.any? %>
+	<table id="messages" class="resource-list">
+		<thead>
+			<tr>
+				<td><%= icon((label rescue "folder")) %></td>
+				<td><%= user_header %></td>
+				<td>Mensagem</td>
+				<td>Tempo</td>
+				<td>Ações</td>
+			</tr>
+		</thead>
+		<tbody>
+			<% for message in messages %>
+				<%= content_tag :tr, :class => message_row_class(message) do %>
+					<td><%= message_icon message %></td>
+					<td><%= user_name(user_column.call(message), message_path(message)) %></td>
+					<td><%= truncate(message.body, :length => 20) %></td>
+					<td><%= time_ago_in_words(message.created_at) %></td>
+					<td><%= icon "eye" %> <%= link_to "Ler", message_path(message) %>
+						<% if message.recipient?(current_user) %>
+							&nbsp;<%= icon "delete" %> 
+							<%= link_to "Deletar", message_path(message), 
+							    :confirm => "A mensagem sera deletada", :method => :delete %>
+						<% end %>
+					</td>
+				<% end %>
+			<% end %>
+		</tbody>
+	</table>
+<% else %>
+	<p><%= icon "page_white_horizontal" %> Vazio</p>
+<% end %>

@@ -1,6 +1,2 @@
 <% title "Marcas" %>
-<ul id="companies">
-	<% for company in @companies %>
-		<li><%= icon "shield" %> <%= link_to company.name, company_path(company) %></li>
-	<% end %>
-</ul>
+<%= render "list", companies: @companies %>

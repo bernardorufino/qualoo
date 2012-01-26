@@ -1,0 +1,19 @@
+<% sidebar do %>
+	<h2>Mensagens</h2>
+	<ul>
+		<li><%= icon "folder" %> <%= link_to "Inbox", inbox_path %></li>
+		<li><%= icon "folder_go"%> <%= link_to "Enviadas", sent_messages_path %></li>
+		<li><%= icon "email_edit" %> <%= link_to "Nova", new_message_path %></li>
+	</ul>
+	<h2>Busca</h2>
+	<%= form_tag search_path do %>
+		<%= text_field :search, :query, :class => "large", :value => search_buffer.query %>
+		<%= select :search, :messages, options_for_select(message_search_scopes, search_buffer.params[:messages]) %>
+		<%= hidden_field :search, :scope, :value => "messages" %>
+		
+		<%= submit_tag icon("magnifier") %>
+	<% end %>
+<% end %>
+
+<%= yield %>
+<% parent_layout :application %>

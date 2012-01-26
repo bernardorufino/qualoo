@@ -3,10 +3,10 @@
 	<p><%= icon "group_edit" %> <%= link_to "Gerenciar minha rede", manage_relationships_path %></p>
 <% end %>
 
-<ul id="<%= id rescue nil %>">
+<ul id="<%= id rescue nil %>" class="resource-list">
 <% for user in users %>
 	<li>
-		<%= user_icon(user) %> <%= link_to user.name, user_path(user), :class => user_class(user) %>
+		<%= user_name(user) %>
 		<% if logged_in? and current_profile.relates_with?(user) and manager %>
 			&nbsp;
 			<% for tag in current_profile.relationship_with(user).tags %>

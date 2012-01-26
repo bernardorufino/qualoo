@@ -1,0 +1,6 @@
+<% title "Mensagem" %>
+<p>De: <%= user_name(@message.sender) %></p>
+<p>Para: <%= user_name(@message.recipient) %></p>
+<div id="message-body">
+	<%= simple_format(@message.body) %>
+</div>

@@ -7,18 +7,23 @@ $deep-bg-color: #EEE;
 $main-color: #D0232E;
 $main-color: #D0232E;
 
-$center-min-width: 700px;
+$medium-center-min-width: 700px;
+$large-center-min-width: 875px; 
 $center-relative-width: 0.8;
 $center-margin: percentage((1 - $center-relative-width) / 2); 
+$font-size: 10pt;
 
 html {
 	font-family: "Helvetica Neue", Arial, sans-serif;
-	font-size: 10pt;
+	font-size: $font-size;
 	color: $text-color;
 }
-body {
-	min-width: round($center-min-width / $center-relative-width);
+body, body.medium {
+	min-width: round($medium-center-min-width / $center-relative-width);
 	background-color: $deep-bg-color;
+}
+body.large {
+	min-width: round($large-center-min-width / $center-relative-width);
 }
 #header {
 	background-color: $bg-color;
@@ -116,7 +121,7 @@ $sidebar-bg-color: $shadow-bg-color;
 		}
 		text-align: center;
 		background-color: $shadow-color;
-		padding: 8px 5px 6px 5px;
+		padding: 5px 5px 6px 5px;
 		margin: 5px (-($main-spacing / 2)) 5px (-($main-spacing / 2));
 		font-size: 120%;
 		&:first-child {
@@ -246,7 +251,7 @@ $small-form-width: 400px;
 $medium-form-width: 500px;
 $large-form-width: 600px;
 $trailing-width: 15px;
-$sized-inputs: "input[type=text], input[type=password], textarea";
+$sized-inputs: "input[type=text], input[type=password], textarea, select";
 $link-color: #0000EE;
 $button: "button, input[type=submit], input[type=reset]";
 
@@ -278,10 +283,12 @@ img.icon {
 img[src="#{image_path('icons/email.png')}"] {
 	top: 4px;
 }
-#users a {
-	color: $text-color;
-	&:hover {
-		color: $link-color;
+.resource-list, #companies, .companies, #categories, #users {
+	a {
+		color: $text-color;
+		&:hover {
+			color: $link-color;
+		}
 	}
 }
 form, form.small {
@@ -319,6 +326,12 @@ form {
 	$form-detail-color: lighten($shadow-color, 10%);
 	$form-padding: 8px;
 	padding: 0 $form-padding $form-padding $form-padding;
+	*[disabled] {
+		cursor: default;
+	}
+	#{$sized-inputs} {
+		font-size: $font-size;
+	}
 	&.inline, &.answer {
 		text-align: center;
 		padding: 0;

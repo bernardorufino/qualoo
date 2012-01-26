@@ -1,6 +1,2 @@
 <% title @category.name %>
-<ul id="companies">
-	<% for company in @category.companies %>
-		<li><%= icon "shield" %> <%= link_to company.name, company_path(company) %></li>
-	<% end %>
-</ul>
+<%= render :partial => "companies/list", :locals => {companies: @category.companies} %>

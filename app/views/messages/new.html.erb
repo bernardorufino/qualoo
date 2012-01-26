@@ -1,0 +1,11 @@
+<% title "Nova mensagem" %>
+<% page :large %>
+<%= form_for @message, :html => {:class => "large"} do |f| %>
+	<%= f.field_set :sender, "De: ", :input => {:value => current_user.name, :disabled => true} %>
+	<%= f.field_set :recipient_id, "Para: ", :block_tag => false do |m| %>
+		<%= f.select m, users_as_options %>
+	<% end %>
+	<p class="info">Você pode usar <%= link_to "formatacao simples", page_path(:formattext) %> para suas mensagens.</p>
+	<%= f.field_set :body, "Mensagem: ", :type => :text_area, :input => {:rows => 6} %>
+	<%= form_actions :submit => "Enviar", :reset => nil %>
+<% end %>

@@ -5,8 +5,14 @@
 class ApplicationController < ActionController::Base
   # TODO: OK Implement companies controller!
   # TODO: OK Implement categories controller!
-  # TODO: DRY in companies/index and categories/show
-  # TODO: Check to_sentence method to write in portuguese by default with /lib/array.rb, in companies_helper 
+  # TODO: OK DRY in companies/index and categories/show
+  # TODO: OK Javascript, update event holding, instead of $(document).ready search for window resized
+  # TODO: OK Update user_icon link_to user.name, user_path to only one method, a helper
+  # TODO: OK Update search naming from 'location' to 'scope'
+  # TODO: OK Refactorate search engine to map resources and paths and options, get the routes of messages away
+  # TODO: OK DRY in Messages#search
+  # TODO: When implement Geocoder, include visibility_id in Location!
+  # TODO: OK Check to_sentence method to write in portuguese by default with /lib/array.rb, in companies_helper 
   # TODO: DRY and refactorate: Eliminate current_profile and makes current_user act as current_profile
   # TODO: Unify icons for resources
   

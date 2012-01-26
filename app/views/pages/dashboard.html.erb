@@ -1,6 +1,7 @@
 <p>Algumas ações disponíveis:</p>
 <ul id="user-actions">
-	<li><%= icon "vcard" %> <%= link_to "Vizualizar dados", user_path(current_user) %></li>
+	<li><%= icon "email" %> <%= link_to "Mensagens", messages_path %></li>
+	<li><%= icon "vcard" %> <%= link_to "Vizualizar perfil", user_path(current_user) %></li>
 	<li><%= icon "application_form_edit" %> <%= link_to "Editar dados", edit_user_path(current_user) %></li>
 </ul>
 <%= render :file => "pages/dashboard/#{to_profile_sym(current_user)}" %>

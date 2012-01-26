@@ -7,10 +7,20 @@ Qualoo::Application.routes.draw do
   root :to => "pages#welcome";
   
   resources :consumer_salesperson_relationships;  
-  
+
   resources :tags do
     resources :consumer_salesperson_relationships, except: CRUD;
   end
+  
+  resources :messages do
+    collection do
+      get "search";
+      get "sent";
+      get "received";
+    end
+  end
+  
+  match "inbox" => "messages#received", :as => :inbox;
   
   resources :companies do
     get "search", on: :collection;
