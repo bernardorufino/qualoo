@@ -11,7 +11,6 @@
 function resizeWindow(e){
 	var center = $("#nav, #main");
 	if($(window).width() < $("body").width()){
-		console.log("IF")
 		if($("#nav, #main").width() < $(window).width()){
 			$resized = true;
 			center.width(center.width());
