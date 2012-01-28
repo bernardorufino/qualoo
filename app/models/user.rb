@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
   end
   
   def unread_messages
-    received_messages.where(["read = ?", false]);
+    received_messages.where(:read => false);
   end
   
   def can_relate_with?(user)
