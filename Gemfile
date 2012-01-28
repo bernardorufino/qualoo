@@ -20,8 +20,8 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-# Tooked away for production issues, see https://github.com/rails/sass-rails/issues/38
-gem 'sass-rails',   '~> 3.2.3'
+# Took away from group :assets for production issues, see https://github.com/rails/sass-rails/issues/38
+gem 'sass-rails', '~> 3.2.3'
 
 gem 'jquery-rails'
 

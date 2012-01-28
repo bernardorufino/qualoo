@@ -5,6 +5,7 @@ tmp/
 .sass-cache/
 .bundle
 .bundle
+Gemfile.lock
 config/database.yml
 log/*.log
 db/*.sqlite3
