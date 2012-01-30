@@ -1,4 +1,4 @@
-<span class="ranking level<%= salesperson.rank_level %><%= (logged_in?) ? " rankable" : "" %><%= (rank_available?(salesperson)) ? "" : " not-ranked" %>" title="<%= salesperson.ranks.count("", "? pessoa avaliou", "? pessoas avaliaram") %>">
+<span id="ranking" class="level<%= salesperson.rank_level %><%= (logged_in?) ? " rankable" : "" %><%= (rank_available?(salesperson)) ? "" : " not-ranked" %>" title="<%= salesperson.ranks.count("", "? pessoa avaliou", "? pessoas avaliaram") %>">
 	<% if logged_in? %>
 		<% for i in 1..5 %><%= link_to icon((salesperson.ranked?(i, current_user) ? "star_mid" : "star_off"), :class => "level#{i}"), 
 		salesperson_measurement_path(salesperson, :level => i), :method => :post %><% end %>

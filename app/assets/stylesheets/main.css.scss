@@ -548,7 +548,7 @@ ul {
 .signature {
 	text-align: right;
 }
-.ranking {
+#ranking {
 	display: inline-block;
 	vertical-align: top;
 	height: 16px;
@@ -572,13 +572,14 @@ ul {
 		background-image: image-url("icons/star.png");
 		width: 16px * 5;
 		a {
+			// Let the 3 lines below here, otherwise Webkit breaks
+			display: inline-block;
+			height: 16px;
+			width: 16px;
 			img {
 				display: inline;
 			}
 			&:hover {
-				display: inline-block;
-				height: 16px;
-				width: 16px;
 				img {
 					display: none;
 				}
