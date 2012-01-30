@@ -3,7 +3,6 @@
 # Consumer.all.reject(&:user).each(&:destroy)
 # Salesperson.all.reject(&:user).each(&:destroy)
 class ApplicationController < ActionController::Base
-  # TODO: OK Likes
   # TODO: When implement Geocoder, include visibility_id in Location!
   # TODO: OK Check to_sentence method to write in portuguese by default with /lib/array.rb, in companies_helper 
   # TODO: DRY and refactorate: Eliminate current_profile and makes current_user act as current_profile
