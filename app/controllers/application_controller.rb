@@ -3,14 +3,7 @@
 # Consumer.all.reject(&:user).each(&:destroy)
 # Salesperson.all.reject(&:user).each(&:destroy)
 class ApplicationController < ActionController::Base
-  # TODO: OK Implement companies controller!
-  # TODO: OK Implement categories controller!
-  # TODO: OK DRY in companies/index and categories/show
-  # TODO: OK Javascript, update event holding, instead of $(document).ready search for window resized
-  # TODO: OK Update user_icon link_to user.name, user_path to only one method, a helper
-  # TODO: OK Update search naming from 'location' to 'scope'
-  # TODO: OK Refactorate search engine to map resources and paths and options, get the routes of messages away
-  # TODO: OK DRY in Messages#search
+  # TODO: OK Likes
   # TODO: When implement Geocoder, include visibility_id in Location!
   # TODO: OK Check to_sentence method to write in portuguese by default with /lib/array.rb, in companies_helper 
   # TODO: DRY and refactorate: Eliminate current_profile and makes current_user act as current_profile
@@ -100,7 +93,12 @@ class ApplicationController < ActionController::Base
     current_user.try(:profile);
   end
   
-  helper_method :logged_in?, :current_user, :current_profile;
+  def current_user?(user_or_profile)
+    return false unless logged_in?;
+    user_or_profile == ((user_or_profile.is_a?(User)) ? current_user : current_profile);
+  end
+  
+  helper_method :logged_in?, :current_user, :current_profile, :current_user?;
   
   # When have time, implement this to accept a block and with capture, takes its content
   # and sets it to the h1, still holdng the *name* for the page title in browser

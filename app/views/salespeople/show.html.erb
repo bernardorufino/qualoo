@@ -1,7 +1,11 @@
 <% title @salesperson.name %>
 <% sidebar do %>
-	<%= render :partial => "consumers/sidebar", :locals => {profile: @salesperson} %>
-	<!--<p>Revendedor das marcas: </p>-->
+	<%= profile_picture(@salesperson) %>
+	<p>
+		<%= icon "email" %> <%= mail_to @salesperson.email %><br />
+		<%= user_icon @salesperson %> <%= friendly_profile_name @salesperson %>
+		<%= render "ranking", salesperson: @salesperson %><br />
+	</p>
 	<ul>
 		<% for company in @salesperson.companies %>
 			<li><%= icon "shield" %> <%= link_to company.name, company_path(company) %></li>
@@ -11,12 +15,21 @@
 
 <%= render :partial => "consumers/actions", :locals => {profile: @salesperson} %>
 
-<h3>Clientes</h3>
+
 <% if @salesperson.custumers.any? %>
+	<h3>Clientes</h3>
 	<%= render :partial => "users/list", :locals => {users: @salesperson.custumers, id: "consumers"} %>
-<% else %>
-	<p><%= @salesperson.name %> não possui ninguém em sua rede pública.</p>
 <% end %>
 
-<h3>Posts</h3>
-<p>Aqui teremos Posts dela</p>
+<% if @salesperson.posts.any? %>
+	<h3>Posts</h3>
+	<% if current_user?(@salesperson) %>
+		<%= render :partial => "posts/form" %>
+	<% end %>
+	<%= render :partial => "posts/list", :locals => {posts: @salesperson.posts} %>
+<% elsif current_user?(@salesperson) %>
+	<h3>Posts</h3>
+	<p>Você não tem posts. Crie um abaixo:</p>
+	<%= render :partial => "posts/form" %>
+	<p class="clear"></p>
+<% end %>

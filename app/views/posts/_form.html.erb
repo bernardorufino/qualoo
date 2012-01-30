@@ -1,0 +1,6 @@
+<%= form_tag posts_path, :class => "embed", :id => "new-post" do %>
+
+	<%= text_area :post, :body, :rows => 2 %>
+	<p class="actions"><%= submit_tag icon("note_edit") %></p>
+	
+<% end %>

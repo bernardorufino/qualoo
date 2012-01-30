@@ -75,7 +75,17 @@ module ApplicationHelper
     content_tag(opts.delete(:tag) || :p,  reset.html_safe + submit.html_safe, {:class => "actions"}.merge(opts));
   end
   
-  # friendly_profile_name in ApplicationControlller ;)
+  def profile_picture(profile)
+    content_tag(:p, :class => "profile-picture") do
+      image_tag("http://fakeimage.heroku.com/100x120?textcolor=!FFFFFF", 
+        :alt => profile.name,
+        :width => 100,
+        :height => 120,
+        :class => "profile-picture"
+      );
+    end
+    
+  end
   
   def icon(name, opts={})
     image_tag("icons/#{name}.png", {width: 16, height: 16, class: "icon"}.merge(opts));

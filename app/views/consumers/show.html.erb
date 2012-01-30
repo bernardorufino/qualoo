@@ -1,6 +1,10 @@
 <% title @consumer.name %>
 <% sidebar do %>
-	<%= render "sidebar", profile: @consumer %>
+	<%= profile_picture(@consumer) %>
+	<p>
+		<%= icon "email" %> <%= mail_to @consumer.email %><br />
+		<%= user_icon @consumer %> <%= friendly_profile_name @consumer %>
+	</p>
 <% end %>
 
 <%= render "actions", profile: @consumer %>

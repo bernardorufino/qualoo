@@ -1,0 +1,21 @@
+<div id="posts">
+	<% for post in posts %>
+		<div class="post">
+			<p class="body"><%= icon "note" %> <%= post.body %></p>
+			<p class="meta">
+				<%= post.nlikes.count "Ninguem curtiu ainda", "? pessoa curtiu", "? pessoas curtiram" %> 
+				<% if logged_in? and post.liked?(current_user) %>
+					<%= icon "thumb_down" %> <%= link_to "Descurtir", post_like_path(post), :method => :delete %> 
+				<% elsif logged_in? %>
+					<%= icon "thumb_up" %> <%= link_to "Curtir", post_like_path(post), :method => :post %> 
+				<% end %>
+				&nbsp;<%= icon((post.created_at > 1.day.ago) ? "time" : "date") %> 
+				<%= time_ago_in_words(post.created_at) %>
+				<% if current_user?(post.salesperson) %>
+					&nbsp;<%= link_to icon("delete") + " Deletar", post_path(post),
+					 	:confirm => "O post sera deletado.", :method => :delete %>
+				<% end %>
+			</p>
+		</div>
+	<% end %>
+</div>

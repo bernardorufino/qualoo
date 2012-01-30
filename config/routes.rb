@@ -36,7 +36,14 @@ Qualoo::Application.routes.draw do
   
   resources :salespeople do
     resources :consumers, except: CRUD;
+    resource :measurement;
+    # No need to have posts here, see the controller
+    #resources :posts, except: CRUD;
     get "search", on: :collection;
+  end
+  
+  resources :posts do
+    resource :like;
   end
   
   resources :consumers do

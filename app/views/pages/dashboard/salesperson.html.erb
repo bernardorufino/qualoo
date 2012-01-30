@@ -1,4 +1,5 @@
 <ul id="salesperson-actions">
 	<li><%= icon "group_edit" %> <%= link_to "Gerenciar clientes", manage_relationships_path %></li>
-	<li><%= user_icon current_profile %> <%= link_to "Editar dados de revendedora", edit_salesperson_path(current_profile) %>
+	<li><%= user_icon current_profile %> <%= link_to "Editar dados profissionais", edit_salesperson_path(current_profile) %>
+	<li><%= icon "note_edit" %> <%= link_to "Postar no perfil", salesperson_path(current_profile) %></li>
 </ul>

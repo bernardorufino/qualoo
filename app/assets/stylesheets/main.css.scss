@@ -322,15 +322,27 @@ form.large {
 		width: $large-form-width - $label-width - $trailing-width;
 	}
 }
+
+$form-detail-color: lighten($shadow-color, 10%);
+$form-padding: 8px;
 form {
-	$form-detail-color: lighten($shadow-color, 10%);
-	$form-padding: 8px;
 	padding: 0 $form-padding $form-padding $form-padding;
 	*[disabled] {
 		cursor: default;
 	}
 	#{$sized-inputs} {
 		font-size: $font-size;
+	}
+	&.embed {
+		margin: 0;
+		padding: 0;
+		width: auto;
+		.actions {
+			margin: 0;
+		}
+		#{$sized-inputs} {
+			width: auto;
+		}
 	}
 	&.inline, &.answer {
 		text-align: center;
@@ -352,6 +364,9 @@ form {
 		#{$sized-inputs} {
 			width: 75px;
 			text-align: left;
+		}
+		textarea {
+			width: auto;
 		}
 		option {
 			display: block;
@@ -399,7 +414,7 @@ form {
 	.actions {
 		border: 1px solid $shadow-color;
 		border-bottom-width: $actions-bottom-border-thickness;
-		padding: $form-padding 8px $form-padding $form-padding;
+		padding: $form-padding;
 		// 1px because of the border
 		margin: -($form-padding + 1px);
 		margin-top: $form-padding + 2px;
@@ -482,10 +497,95 @@ table {
 ul {
 	margin-bottom: 10px;
 }
-
-
-
-
+#posts {
+	border-bottom: 1px solid $shadow-color;
+	margin: 5px 0px 10px 0px;
+	.post {
+		&:hover {
+			background-color: $bg-color;
+			border-left: 5px solid $main-color;
+			margin-left: -4px;
+			.body {
+				background-color: lighten($shadow-bg-color, 2%);
+			}
+		} 
+		background-color: lighten($shadow-bg-color, 2%);
+		border: {
+			top: 1px solid $shadow-color;
+			left: 1px solid $shadow-color;
+			right: 1px solid $shadow-color;
+		} 
+		padding-left: 5px;
+		.body {
+			.icon {
+				margin-left: -21px;
+			}
+			margin-left: -5px;
+			padding: 5px 5px 5px 26px;
+			background-color: $bg-color;
+		}
+		.meta {
+			font-size: 80%;
+			color: lighten($text-color, 50%);
+			padding: 3px 2px 2px 0px;
+		}
+	}
+}
+#new-post {
+	$width: 300px;
+	textarea, .actions {
+		// textarea padding is 1px, under default.css.scss
+		width: $width - 1px - 1px;
+	}
+	.actions {
+		$new-post-actions-padding: 3px;
+		padding: $new-post-actions-padding; 
+		width: $width - (2 * $new-post-actions-padding);
+		position: relative;
+		bottom: 2px;
+	}
+}
+.signature {
+	text-align: right;
+}
+.ranking {
+	display: inline-block;
+	vertical-align: top;
+	height: 16px;
+	background: {
+		image: image-url("icons/star.png");
+		repeat: repeat-x;
+	}
+	@for $i from 1 through 5 {
+		&.level#{$i} {
+			width: 16px * $i;
+		}
+	}
+	img {
+		display: none;
+	}
+	&.not-ranked {
+		background-image: image-url("icons/star_off.png");
+		width: 16px * 5;
+	}
+	&.rankable:hover {
+		background-image: image-url("icons/star.png");
+		width: 16px * 5;
+		a {
+			img {
+				display: inline;
+			}
+			&:hover {
+				display: inline-block;
+				height: 16px;
+				width: 16px;
+				img {
+					display: none;
+				}
+			}
+		}
+	}
+}
 
 
 
