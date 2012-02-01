@@ -67,22 +67,29 @@ module ApplicationHelper
     button_tag(*args, &block);
   end
   
-  def form_actions(opts={})
+  def form_actions(opts={}, &content)
     submit = opts.key?(:submit) ? opts.delete(:submit) : "Submeter";
     reset = opts.key?(:reset) ? opts.delete(:reset) : "Resetar";
     submit = (submit) ? submit_tag(submit) : "";
     reset = (reset) ? submit_tag(reset, :type => "reset") : "";
-    content_tag(opts.delete(:tag) || :p,  reset.html_safe + submit.html_safe, {:class => "actions"}.merge(opts));
+    content = (block_given?) ? capture(&content) : "";
+    content_tag(opts.delete(:tag) || :p, (content + reset + submit).html_safe, {:class => "actions"}.merge(opts));
   end
   
   def profile_picture(profile)
     content_tag(:p, :class => "profile-picture") do
-      image_tag("http://fakeimage.heroku.com/100x120?textcolor=!FFFFFF", 
+      #image_tag(profile.avatar.version(:profile).path, 
+      # Uncomment above and comment below when commit to production :)
+      image_tag(profile.avatar.path,
         :alt => profile.name,
-        :width => 100,
-        :height => 120,
+        :width => Image::Versions[:profile][:resize].first,
+        :height => Image::Versions[:profile][:resize].last,
         :class => "profile-picture"
-      );
+      ) + (if current_user?(profile.user)
+        "<br />" + icon("picture") + " " + link_to("Atualizar foto", edit_avatar_path)
+      else 
+        ""
+      end).html_safe;
     end
     
   end

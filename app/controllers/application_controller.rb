@@ -3,6 +3,8 @@
 # Consumer.all.reject(&:user).each(&:destroy)
 # Salesperson.all.reject(&:user).each(&:destroy)
 class ApplicationController < ActionController::Base
+  # TODO: Implement a helper use_original_user_path to be added to the pages or actions in which
+  # we need to use the original user_path, instead of the list in the method, check user_path below
   # TODO: When implement Geocoder, include visibility_id in Location!
   # TODO: OK Check to_sentence method to write in portuguese by default with /lib/array.rb, in companies_helper 
   # TODO: DRY and refactorate: Eliminate current_profile and makes current_user act as current_profile
@@ -27,14 +29,21 @@ class ApplicationController < ActionController::Base
     redirect_to page_path(:dashboard);
   end
   
-  def user_path(user, *args)
+  def user_path_with_profile(user, *args)
     user = User.find(user) if user.kind_of?(Fixnum);
-    if user.profile
+    original_use_paths = [
+      user_path_without_profile(params[:id]), 
+      edit_user_path(params[:id]), 
+      new_user_path(params[:id])
+    ];
+    if user.profile and not original_use_paths.include?(request.path)
       send("#{user.profile_type.downcase}_path", user.profile,*args)
     else
-      user_path(user, *args);
+      user_path_without_profile(user, *args);
     end
   end
+  
+  alias_method_chain :user_path, :profile
   
   def user_url(*args)
     request.protocol + request.host_with_port + user_path(*args);

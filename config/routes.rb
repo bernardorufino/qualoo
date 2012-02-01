@@ -34,6 +34,8 @@ Qualoo::Application.routes.draw do
     get "search", on: :collection;
   end
   
+  resource :avatar;
+  
   resources :salespeople do
     resources :consumers, except: CRUD;
     resource :measurement;

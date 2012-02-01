@@ -1,5 +1,5 @@
 class UsersController < ApplicationController  
-  requires_authentication only: [:edit, :update];
+  requires_authentication only: [:avatar, :edit, :update];
   
   def search
     @users = User.search(params[:query]);
@@ -20,6 +20,7 @@ class UsersController < ApplicationController
   end
   
   def create
+    #debug "hop"
     @user = User.new(params[:user]);
     if @user.save
       login_user(@user);
@@ -36,9 +37,9 @@ class UsersController < ApplicationController
   
   def update
     @user = current_user;
-    if @user.update_attributes(params[:user])
+    if @user.update_attributes!(params[:user])
       flash[:notice] = "Dados atualizados com sucesso!";
-      redirect_to edit_user_path(@user)
+      redirect_to :back;
     else
       flash.now[:error] = "Erro ao atualizar dados. Atente para os campos destacados abaixo.";
       render :action => :edit;

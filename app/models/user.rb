@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :measurements_done, class_name: "Measurement", foreign_key: :measurer_id;
   has_many :likes;
   has_many :tags;
+  has_one :avatar, class_name: "Image", as: :imageable, dependent: :destroy;
   
   attr_accessor :password;
   
@@ -24,6 +25,7 @@ class User < ActiveRecord::Base
   
   before_save :set_profile, :encrypt_new_password;
   after_validation :set_password_confirmation_error;
+  after_initialize :default_values;
   
   scope :salespeople, where(profile_type: "Salesperson");
   scope :consumers, where(profile_type: "Consumer");
@@ -90,7 +92,17 @@ class User < ActiveRecord::Base
     ["bermonruf@gmail.com", "rodolfo.pinotti@gmail.com"].include?(email);
   end
   
+  def default_avatar
+    self.avatar.destroy;
+    self.avatar = nil;
+    self.reload;    
+  end
+  
   protected
+  def default_values
+    self.avatar = Image.default(:avatar) if avatar.nil?;
+  end
+  
   def set_profile
     if new_record? and not profile
       self.profile = profile_type.classify.constantize.create({});

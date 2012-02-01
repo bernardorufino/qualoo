@@ -420,6 +420,9 @@ form {
 		margin-top: $form-padding + 2px;
 		text-align: right;
 		background-color: $form-detail-color;
+		.icon {
+			vertical-align: middle;
+		}
 		input {
 			width: auto;
 		}
