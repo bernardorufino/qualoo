@@ -48,7 +48,7 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  alias_method_chain :user_path, :profile
+  alias_method_chain :user_path, :profile rescue nil;
   
   def user_url(*args)
     request.protocol + request.host_with_port + user_path(*args);
