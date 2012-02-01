@@ -8,10 +8,10 @@ class AvatarsController < ApplicationController
   def update
     @avatar = current_user.avatar;
     if @avatar.update_attributes(params[:avatar]) 
-      flash[:notice] = "Imagem de perfil atualizada!";
+      flash[:notice] = "IFoto de perfil atualizada!";
       redirect_to user_path(current_user);
     else
-      flash[:error] = "Erro ao mudar imagem de perfil.";
+      flash[:error] = "Erro ao mudar foto de perfil.";
       render :action => :edit;
     end
   end

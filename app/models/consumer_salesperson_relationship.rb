@@ -1,4 +1,7 @@
 class ConsumerSalespersonRelationship < ActiveRecord::Base
+  include VisibilityControl;
+  default_visibility :public;
+  
   belongs_to :consumer;
   belongs_to :salesperson;
   belongs_to :visibility;
@@ -63,11 +66,5 @@ class ConsumerSalespersonRelationship < ActiveRecord::Base
   def target
     send(owner.relates_with.downcase);
   end
-  
-  Visibility::Main.each do |v|
-    define_method(v.to_s + "!"){self.visibility = Visibility.send(v); self.save;}; 
-  end
-  
-  delegate *Visibility::Main.map{|v| v.to_s + "?"}, to: :visibility;
   
 end

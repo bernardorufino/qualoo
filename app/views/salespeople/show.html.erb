@@ -15,6 +15,10 @@
 
 <%= render :partial => "consumers/actions", :locals => {profile: @salesperson} %>
 
+<% if @salesperson.location? %>
+	<%= map(@salesperson.location) %>
+<% end %>
+
 
 <% if @salesperson.custumers.any? %>
 	<h3>Clientes</h3>

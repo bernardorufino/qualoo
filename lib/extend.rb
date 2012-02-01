@@ -14,3 +14,15 @@ class Fixnum
   end
   
 end
+class Numeric
+  
+  # Geocoder compatibility
+  def km
+    Geocoder::Calculations.to_miles(self);
+  end
+  
+  def to_km
+    Geocoder::Calculations.to_kilometers(self);
+  end
+  
+end

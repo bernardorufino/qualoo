@@ -11,12 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120131073320) do
+ActiveRecord::Schema.define(:version => 20120201135945) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "categories_companies", :force => true do |t|
@@ -26,15 +26,15 @@ ActiveRecord::Schema.define(:version => 20120131073320) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "company_salesperson_contracts", :force => true do |t|
     t.integer  "salesperson_id"
     t.integer  "company_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "consumer_salesperson_relationships", :force => true do |t|
@@ -42,13 +42,13 @@ ActiveRecord::Schema.define(:version => 20120131073320) do
     t.integer  "salesperson_id"
     t.string   "owner_type"
     t.integer  "visibility_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "consumers", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "images", :force => true do |t|
@@ -62,57 +62,65 @@ ActiveRecord::Schema.define(:version => 20120131073320) do
   create_table "likes", :force => true do |t|
     t.integer  "post_id"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "locations", :force => true do |t|
     t.float    "latitude"
     t.float    "longitude"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "visibility_id"
+    t.integer  "localizable_id"
+    t.string   "localizable_type"
+    t.string   "street"
+    t.string   "city"
+    t.string   "state"
+    t.string   "country"
+    t.integer  "postal_code"
   end
 
   create_table "measurements", :force => true do |t|
     t.integer  "level"
     t.integer  "measured_id"
     t.integer  "measurer_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "messages", :force => true do |t|
     t.integer  "sender_id"
     t.integer  "recipient_id"
     t.text     "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.boolean  "read"
   end
 
   create_table "posts", :force => true do |t|
     t.integer  "salesperson_id"
     t.text     "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "relationship_taggings", :force => true do |t|
     t.integer  "consumer_salesperson_relationship_id"
     t.integer  "tag_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
   end
 
   create_table "salespeople", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "tags", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "user_id"
   end
 
@@ -121,19 +129,17 @@ ActiveRecord::Schema.define(:version => 20120131073320) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "password_hash"
-    t.integer  "location_id"
     t.integer  "profile_id"
     t.string   "profile_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "visibilities", :force => true do |t|
     t.string   "name"
     t.string   "symbol"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end

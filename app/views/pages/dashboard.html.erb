@@ -4,5 +4,10 @@
 	<li><%= icon "vcard" %> <%= link_to "Vizualizar perfil", user_path(current_user) %></li>
 	<li><%= icon "picture" %> <%= link_to "Atualizar foto", edit_avatar_path %></li>
 	<li><%= icon "application_form_edit" %> <%= link_to "Editar dados", edit_user_path(current_user) %></li>
+	<% if current_profile.location %>
+		<li><%= icon "map" %> <%= link_to "Atualizar endereco", edit_location_path(current_profile.location) %></li>
+	<% else %>
+		<li><%= icon "map" %> <%= link_to "Adicionar endereco", new_location_path %></li>
+	<% end %>
 </ul>
 <%= render :file => "pages/dashboard/#{to_profile_sym(current_user)}" %>

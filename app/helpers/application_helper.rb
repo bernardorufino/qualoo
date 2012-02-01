@@ -2,6 +2,48 @@ module ApplicationHelper
   include EmbedFormHelper;
   include FieldSetHelper;
   
+  def localizable_types
+    User.profile_types.map do |type|
+      [friendly_profile_name(type, plural: true), type];
+    end
+  end
+  
+  def visibilities
+    Visibility.all.map{|v| [v.name, v.id];};
+  end
+  
+  def map(location, opts={})
+    if logged_in? and current_profile.location
+      markers = ["color:red|label:A|#{current_profile.location.coordinates.join(',')}"];
+      markers << "color:blue|label:B|#{location.coordinates.join(',')}";
+    else
+      markers = ["color:red|label:A|#{location.coordinates.join(',')}"];
+    end
+    opts = {
+      :width => 300,
+      :height => 200,
+      #:zoom => 13,
+      #:center => location.coordinates.join(","),
+      :sensor => false, # From a GPS like device?
+      :format => [:jpeg, :gif, :png][2],
+      :maptype => [:roadmap, :satellite, :hybrid, :terrain][2] 
+    }.merge(opts);
+    image_opts = {:width => opts[:width], :height => opts[:height]};
+    opts[:size] = "#{opts.delete(:width)}x#{opts.delete(:height)}";
+    query = opts.to_query;
+    query += ([""] + markers.map{|m| "markers=#{m}"}).join("&");
+    content_tag(:p, :class => :centralized) do
+      image_tag("http://maps.google.com/maps/api/staticmap?#{query}", image_opts) + (
+        if logged_in? and current_profile.location
+          "<br /><span style=\"color: red;\">A</span>: Meu endereco <br />" +
+          "<span style=\"color: blue;\">B</span>: Endereco de #{location.localizable.name} <br />"
+        else ""; end).html_safe + (
+        if current_user?(location.localizable)
+          "<br />" + icon("map") + " " + link_to("Atualizar endereco", edit_location_path(location));
+        else ""; end).html_safe;
+    end
+  end
+  
   def page(html_class=nil)
     @html_class = html_class if html_class;
     @html_class || "medium";

@@ -1,0 +1,14 @@
+<% title "Resultados da Localizacao" %>
+<% if @profiles.any? %>
+	<p>Mostrando <%= friendly_profile_name(params[:localizable_type], plural: true).downcase %> mais proximos de mim.</p>
+	<ul>
+		<% for profile in @profiles %>
+			<li>
+				<%= user_icon(profile) %> <%= link_to profile.name, user_path(profile) %> 
+				(<%= distance(profile, current_profile) %>)
+			</li>
+		<% end %>
+	</ul>
+<% else %>
+	Nenhum resultado <%= icon "emoticon_unhappy" %>
+<% end %>

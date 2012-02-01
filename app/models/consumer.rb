@@ -2,6 +2,7 @@ class Consumer < ActiveRecord::Base
   include ChildBehavior;
   include Profile;
   
+  has_one :location, as: :localizable;
   is_one :user, as: :profile;
   has_many :consumer_salesperson_relationships, conditions: {owner_type: "Consumer"};
   has_many :salespeople, through: :consumer_salesperson_relationships;

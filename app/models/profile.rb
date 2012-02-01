@@ -17,6 +17,11 @@ module Profile
     send(to_profile_sym(relates_with, plural: true)).new;
   end
   
+  def location?
+    location and location.public?;
+  end
+  
+  
   module ClassMethods
     
     def search(*args)

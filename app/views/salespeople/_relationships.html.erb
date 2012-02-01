@@ -81,6 +81,6 @@
 		</tbody>
 	</table>
 <% else %>
-	<% empty_message = empty_message rescue "Sua rede ainda esta vazia" %>
-	<p><%= icon "page_white_horizontal" %> <%= empty_message %></p>
+	<p><%= icon "page_white_horizontal" %> 
+	<%= empty_message rescue "Sua rede ainda esta vazia" %></p>
 <% end %>

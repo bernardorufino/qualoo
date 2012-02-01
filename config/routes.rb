@@ -34,7 +34,9 @@ Qualoo::Application.routes.draw do
     get "search", on: :collection;
   end
   
-  resource :avatar;
+  resources :locations do
+    post "search", on: :collection;
+  end
   
   resources :salespeople do
     resources :consumers, except: CRUD;
@@ -53,7 +55,7 @@ Qualoo::Application.routes.draw do
     get "search", on: :collection;    
   end;
   
-  resource :session, :search;
+  resource :session, :search, :avatar;
   
   match "login" => "sessions#new", :as => :login;
   match "logout" => "sessions#destroy", :as => :logout;

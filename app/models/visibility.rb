@@ -6,8 +6,12 @@ class Visibility < ActiveRecord::Base
   validates_presence_of :name;
   validates :symbol, presence: true, uniqueness: true;
   
+  def self.[](code)
+    first(:conditions => {symbol: code.to_s});
+  end
+  
   Main.each do |code|
-    define_singleton_method(code){first(:conditions => {symbol: code.to_s});};
+    define_singleton_method(code){self[code];};
     define_method(code.to_s + "?"){symbol == code;}; 
   end
   

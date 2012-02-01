@@ -3,8 +3,7 @@ class CreateVisibilities < ActiveRecord::Migration
     create_table :visibilities do |t|
       t.string :name
       t.string :symbol
-      t.text :description
-
+      
       t.timestamps
     end
   end

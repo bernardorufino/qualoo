@@ -1,0 +1,13 @@
+<%= form_for @location, :html => {:class => "medium"} do |f| %>
+
+	<%= f.field_set :street, "Rua/Avenida: " %>
+	<%= f.field_set :city, "Cidade: " %>
+	<%= f.field_set :state, "Estado: " %>
+	<%= f.field_set :country, "Pais: ", :input => {:value => "Brasil", :disabled => true} %>
+	<%= f.field_set :visibility_id, "Visibilidade: ", :block_tag => false do |m| %>
+		<% f.select m, options_for_select(visibilities, @location.visibility.id) %>
+	<% end %>
+	
+	<%= form_actions :submit => submit, :reset => reset %>
+
+<% end %>

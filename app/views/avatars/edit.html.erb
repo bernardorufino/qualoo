@@ -1,6 +1,6 @@
 <%= form_tag avatar_path, :class => "medium", :multipart => true, :method => :put  do |f| %>
 	<%= field_set :avatar, :file, "Foto: ", :type => :file_field %>
-	<%= form_actions :submit => "Mudar", :reset => nil do %>
+	<%= form_actions :submit => "Atualizar", :reset => nil do %>
 		<%= icon "delete" %> <%= link_to "Remover foto", avatar_path, :confirm => "Sua foto sera removida.", :method => :delete %>
 	<% end %>
 <% end %>

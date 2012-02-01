@@ -9,9 +9,11 @@
 
 <%= render "actions", profile: @consumer %>
 
-<h3>Rede de negócios</h3>
+<% if @consumer.location? %>
+	<%= map(@consumer.location) %>
+<% end %>
+
 <% if @consumer.network.any? %>
+	<h3>Rede de negócios</h3>
 	<%= render :partial => "users/list", :locals => {users: @consumer.network, id: "salespeople"} %>
-<% else %>
-	<p><%= @consumer.name %> não possui ninguém em sua rede pública.</p>
 <% end %>

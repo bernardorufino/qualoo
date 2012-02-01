@@ -13,12 +13,13 @@
 	<h1><%= link_to "Qualoo", root_path %></h1>
 	<ul id="main-actions">
 		<% if logged_in? %>
-			<li><%= link_to current_user.name, user_path(current_user) %></li>
+			<li><%= current_user.name %></li>
+			<li><%= link_to "Meu Perfil", user_path(current_user) %></li>
 			<li><%= link_to "Mensagens", messages_path %></li>
-			<li><%= link_to "Dashboard", page_path(:dashboard) %></li>
-			<li><%= link_to "Logout", logout_path %></li>	
+			<li><%= link_to "Painel de Controle", page_path(:dashboard) %></li>
+			<li><%= link_to "Sair", logout_path %></li>	
 		<% else %>
-			<li><%= link_to "Login", login_path %></li>
+			<li><%= link_to "Entrar", login_path %></li>
 			<li><%= link_to "Cadastro", new_user_path %></li>
 		<% end %>
 	</ul>
@@ -30,9 +31,8 @@
 </div>
 <div id="nav">
 	<ul class="inline">
-		<li><%= link_to "Generos", categories_path %></li> | 
+		<li><%= link_to "Gêneros de Produtos", categories_path %></li> | 
 		<li><%= link_to "Marcas", companies_path %></li> | 
-		<li><%= link_to "Usuarios", users_path %></li> | 
 		<li><%= link_to "Profissional", salespeople_path %></li> | 
 		<li><%= link_to "Clientes", consumers_path %></li>
 	</ul>
@@ -55,9 +55,12 @@
 <div id="footer">
 	<p><strong>Qualoo</strong></p>
 	<p>
-		<a href="#quem-somos">Termos</a> | 
-		<a href="#quem-somos">Quem somos</a> | 
-		<a href="#contato">Contato</a>
+		<%= link_to "Benefícios para sua Empresa", page_path(:benefits) %><br />
+		<%= link_to "Espaço Cliente", page_path(:consumer) %> | 
+		<%= link_to "Espaco Profissional", page_path(:salesperson) %><br />
+		<%= link_to "Sobre", page_path(:about) %> | 
+		<%= link_to "Termos de uso", page_path(:terms) %> | 
+		<%= link_to "Contato", page_path(:contact) %>
 	</p>
 <% end %>
 

@@ -1,8 +1,16 @@
+<% if logged_in? and current_profile.location %>
+	<h2>Localizar</h2>
+	<%= form_tag search_locations_path, :id => "localizate" do %>
+		<%= select_tag :localizable_type, options_for_select(localizable_types) %><br />
+		a <%= text_field_tag :radius, 10 %>km de mim
+		<%= submit_tag icon("magnifier") %>
+	<% end %>
+<% end %>
+
 <h2>Pesquisa</h2>
-<%= form_tag search_path do %>
-	<%= text_field :search, :query, :class => "large", :value => search_buffer.query %>
+<%= form_tag search_path, :id => "search" do %>
+	<%= text_field :search, :query, :value => search_buffer.query %>
 	<%= select :search, :scope, options_for_select(search_scopes, search_buffer.scope)  %>
-	
 	<%= submit_tag icon("magnifier") %>
 <% end %>
 

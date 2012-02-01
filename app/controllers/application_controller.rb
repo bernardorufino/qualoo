@@ -3,9 +3,14 @@
 # Consumer.all.reject(&:user).each(&:destroy)
 # Salesperson.all.reject(&:user).each(&:destroy)
 class ApplicationController < ActionController::Base
+  # TODO: OK Implement GEOCODER
+  # TODO: Use .gitignore for avatars
+  # TODO: OK Check pages and search
   # TODO: Implement a helper use_original_user_path to be added to the pages or actions in which
   # we need to use the original user_path, instead of the list in the method, check user_path below
-  # TODO: When implement Geocoder, include visibility_id in Location!
+  # TODO: OK When implement Geocoder, include visibility_id in Location!
+  # TODO: Create observations for location's form (About adress and stuff)
+  # TODO: OK Check if after initialization can be called only once, see VisibilityControl in /lib
   # TODO: OK Check to_sentence method to write in portuguese by default with /lib/array.rb, in companies_helper 
   # TODO: DRY and refactorate: Eliminate current_profile and makes current_user act as current_profile
   # TODO: Unify icons for resources

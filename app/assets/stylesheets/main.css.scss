@@ -449,10 +449,28 @@ form {
 			display: block;
 		}
 	}
+	#search_query {
+		width: 160px;
+	}
+	#search_scope {
+		width: 120px;
+	}
+	#localizable_type {
+		width: 143px;
+	}
+	#radius {
+		width: 20px;
+	}
 	#{$sized-inputs} {
 		width: 0.6 * $sidebar-width;
 		&.large {
 			width: 0.78 * $sidebar-width;
+		}
+		&.small {
+			width: 0.3 * $sidebar-width;
+		}
+		&.tiny {
+			width: 0.1 * $sidebar-width;
 		}
 	}
 	.profile-picture {
@@ -589,6 +607,12 @@ ul {
 			}
 		}
 	}
+}
+.distance {
+}
+.unit {
+	color: lighten($text-color, 20%);
+	font-size: 90%;
 }
 
 
