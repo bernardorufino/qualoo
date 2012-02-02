@@ -21,10 +21,10 @@
 	<p>Legenda</p>
 	<ul>
 		<% if users.any?(&:consumer?) %>
-			<li><%= user_icon :consumer %> <span class="<%= user_class :consumer %>">Cliente</span></li>
+			<li><%= user_icon :consumer %> <span class="<%= user_class :consumer %>"><%= friendly_profile_name(:consumer) %></span></li>
 		<% end %>	
 		<% if users.any?(&:salesperson?) %>
-		<li><%= user_icon :salesperson %> <span class="<%= user_class :salesperson %>">Revendedor</span></li>
+		<li><%= user_icon :salesperson %> <span class="<%= user_class :salesperson %>"><%= friendly_profile_name(:salesperson) %></span></li>
 		<% end %>
 		<% if logged_in? and users.any?{|u| current_profile.relates_with?(u)} %>
 			<li><%= user_icon :network %> <span class="<%= user_class :network %>">Pertence à minha rede</span></li>

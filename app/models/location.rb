@@ -20,7 +20,7 @@ class Location < ActiveRecord::Base
   end
   
   def address_changed?
-    street_changed? or city_changed? or state_changed? or country_changed?;
+     new_record? or street_changed? or city_changed? or state_changed? or country_changed?;
   end
   
   def coordinates

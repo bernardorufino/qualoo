@@ -1,7 +1,12 @@
 <% title @company.name %>
+
 <% sidebar do %>
-	<h2>Revendedores</h2>
-	<%= render :partial => "users/list", :locals => {users: @company.salespeople, id: "salespeople"} %>
+	<h2>Representantes</h2>
+	<% if @company.salespeople.any? %>
+		<%= render :partial => "users/list", :locals => {users: @company.salespeople, id: "salespeople"} %>
+	<% else %>
+		<p class="centralized"><%= icon "page_white_horizontal" %> Nenhum desta marca.</p>
+	<% end %>
 <% end %>
 <% if @company.categories.any? %>
 	<p><%= icon "flag_blue" %> <%= categories_sentence(@company.categories) %></p>

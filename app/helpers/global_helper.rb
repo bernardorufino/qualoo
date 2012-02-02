@@ -33,7 +33,7 @@ module GlobalHelper
   def friendly_profile_name(profile_type, *args)
     profile_type = profile_type.profile_type if profile_type.respond_to?(:profile_type);
     friendly_name(profile_type, {
-      :salesperson => ["Revendedor", "Revendedores"],
+      :salesperson => ["Profissional", "Profissionais"],
       :consumer => ["Cliente", "Clientes"]
     }, *args);
   end

@@ -36,7 +36,7 @@ class SalespeopleController < ApplicationController
     if @salesperson.update_attributes(params[:salesperson])
       welcome_user;
     else
-      flash[:error] = "Erro ao cadastrar revendedora.";
+      flash[:error] = "Erro ao cadastrar #{friendly_profile_name(:salesperson).downcase}.";
       render :action => :new;
     end
   end
