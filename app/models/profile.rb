@@ -6,8 +6,7 @@ module Profile
   end
   
   ClassEval = lambda do
-    after_initialize :default_values;
-    
+    # Call stuff like calling in the class, e.g. has_one :res
   end
   
   module ClassMethods
@@ -33,11 +32,6 @@ module Profile
   
   def location?
     location and location.public?;
-  end
-
-  protected
-  def default_values
-    self.avatar = Image.default(:avatar) if avatar.nil?;
   end
   
 end
