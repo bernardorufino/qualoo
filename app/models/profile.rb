@@ -1,7 +1,21 @@
 module Profile
   
   def self.included(klass)
+    klass.send(:class_exec, &ClassEval)
     klass.extend(ClassMethods);
+  end
+  
+  ClassEval = lambda do
+    after_initialize :default_values;
+    
+  end
+  
+  module ClassMethods
+    
+    def search(*args)
+      User.search(*args).where(profile_type: self.to_s).map(&:profile);
+    end
+    
   end
   
   def relationships
@@ -20,14 +34,10 @@ module Profile
   def location?
     location and location.public?;
   end
-  
-  
-  module ClassMethods
-    
-    def search(*args)
-      User.search(*args).where(profile_type: self.to_s).map(&:profile);
-    end
-    
+
+  protected
+  def default_values
+    self.avatar = Image.default(:avatar) if avatar.nil?;
   end
   
 end

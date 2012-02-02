@@ -24,7 +24,6 @@ class User < ActiveRecord::Base
   
   before_save :set_profile, :encrypt_new_password;
   after_validation :set_password_confirmation_error;
-  after_initialize :default_values;
   
   scope :salespeople, where(profile_type: "Salesperson");
   scope :consumers, where(profile_type: "Consumer");
@@ -97,11 +96,7 @@ class User < ActiveRecord::Base
     self.reload;    
   end
   
-  protected
-  def default_values
-    self.avatar = Image.default(:avatar) if avatar.nil?;
-  end
-  
+  protected  
   def set_profile
     if new_record? and not profile
       self.profile = profile_type.classify.constantize.create({});
