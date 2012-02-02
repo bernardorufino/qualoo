@@ -79,6 +79,11 @@ class Image < ActiveRecord::Base
   
   def copy_file
     File.copy_stream(@file, physical_path);
+    reset_file;
+  end
+  
+  def reset_file
+    @file = nil;
   end
   
   def delete_file
