@@ -19,7 +19,7 @@
     @relationship = current_profile.relationships.new(params[:consumer_salesperson_relationship]);
     if @relationship.save
       flash[:notice] = "#{@relationship.target.name} foi adicionado a sua rede!";
-      redirect_to user_path(@relationship.target);
+      redirect_to profile_path(@relationship.target);
     else
       flash[:error] = "Erro ao tentar adiciona-lo a sua rede";
       redirect_to params[:target_path];

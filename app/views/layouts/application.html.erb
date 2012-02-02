@@ -14,7 +14,7 @@
 	<ul id="main-actions">
 		<% if logged_in? %>
 			<li><%= current_user.name %></li>
-			<li><%= link_to "Meu Perfil", user_path(current_user) %></li>
+			<li><%= link_to "Meu Perfil", profile_path(current_user) %></li>
 			<li><%= link_to "Mensagens", messages_path %></li>
 			<li><%= link_to "Painel de Controle", page_path(:dashboard) %></li>
 			<li><%= link_to "Sair", logout_path %></li>	

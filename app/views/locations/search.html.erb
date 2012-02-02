@@ -4,7 +4,7 @@
 	<ul>
 		<% for profile in @profiles %>
 			<li>
-				<%= user_icon(profile) %> <%= link_to profile.name, user_path(profile) %> 
+				<%= user_icon(profile) %> <%= link_to profile.name, profile_path(profile) %> 
 				(<%= distance(profile, current_profile) %>)
 			</li>
 		<% end %>

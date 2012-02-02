@@ -15,7 +15,7 @@ class LocationsController < ApplicationController
     @location = current_profile.build_location(params[:location]);
     if @location.save
       flash[:notice] = "Endereco adicionado com sucesso!";
-      redirect_to user_path(current_profile);
+      redirect_to profile_path(current_profile);
     else
       flash[:error] = "Erro ao adicionar endereco.";
       render :action => :new;
@@ -30,7 +30,7 @@ class LocationsController < ApplicationController
     @location = current_profile.location;
     if @location.update_attributes(params[:location])
       flash[:notice] = "Endereco atualizado com sucesso!";
-      redirect_to user_path(current_user);
+      redirect_to profile_path(current_profile);
     else
       flash[:error] = "Erro ao atualizar endereco.";
       render :action => :edit;

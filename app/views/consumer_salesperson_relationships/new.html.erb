@@ -1,10 +1,10 @@
 <%= form_for @relationship, :html => {:class => "answer"} do |f| %>
-	<p>Deseja adicionar o <%= friendly_profile_name(@user).downcase %> <%= link_to @user.name, user_path(@user) %> à sua rede
+	<p>Deseja adicionar o <%= friendly_profile_name(@user).downcase %> <%= link_to @user.name, profile_path(@user) %> à sua rede
 		<%= f.select :visibility_id, options_for_select(visibilities) %>	
 	?</p>
 	<%= f.hidden_fields :consumer_id => @consumer.id,
 						:salesperson_id => @salesperson.id,
 						:owner_type => current_user.profile_type %>
-	<%= hidden_field_tag :target_path, user_path(@user) %>
-	<%= submit_tag "Sim" %> | <%= link_to "Não", user_path(@user)  %>
+	<%= hidden_field_tag :target_path, profile_path(@user) %>
+	<%= submit_tag "Sim" %> | <%= link_to "Não", profile_path(@user)  %>
 <% end %>

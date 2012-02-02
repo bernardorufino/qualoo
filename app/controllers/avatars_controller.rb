@@ -9,7 +9,7 @@ class AvatarsController < ApplicationController
     @avatar = current_user.avatar;
     if @avatar.update_attributes(params[:avatar]) 
       flash[:notice] = "IFoto de perfil atualizada!";
-      redirect_to user_path(current_user);
+      redirect_to profile_path(current_profile);
     else
       flash[:error] = "Erro ao mudar foto de perfil.";
       render :action => :edit;
@@ -19,7 +19,7 @@ class AvatarsController < ApplicationController
   def destroy
     current_user.default_avatar;
     flash[:info] = "Foto retirada."
-    redirect_to user_path(current_user);    
+    redirect_to profile_path(current_profile);    
   end
 
 end

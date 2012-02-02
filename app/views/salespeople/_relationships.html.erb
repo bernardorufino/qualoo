@@ -51,7 +51,7 @@
 		<tbody>
 			<% for r in relationships %>
 			<tr>
-				<td><%= user_icon r.target %> <%= link_to r.target.name, user_path(r.target) %></td>
+				<td><%= user_icon r.target %> <%= link_to r.target.name, profile_path(r.target) %></td>
 				<td>
 					<%= form_for r, :html => {:class => "inline"} do |f|  %>
 						<%= f.select :visibility_id, options_for_select(visibilities, r.visibility.id) %>

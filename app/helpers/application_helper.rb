@@ -34,7 +34,7 @@ module ApplicationHelper
     query += ([""] + markers.map{|m| "markers=#{m}"}).join("&");
     content_tag(:p, :class => :centralized) do
       image_tag("http://maps.google.com/maps/api/staticmap?#{query}", image_opts) + (
-        if logged_in? and current_profile.location
+        if logged_in? and current_profile.location and not current_user?(location.localizable)
           "<br /><span style=\"color: red;\">A</span>: Meu endereco <br />" +
           "<span style=\"color: blue;\">B</span>: Endereco de #{location.localizable.name} <br />"
         else ""; end).html_safe + (
@@ -157,7 +157,7 @@ module ApplicationHelper
   end
   
   def user_name(user, path=nil)
-    path ||= user_path(user);
+    path ||= profile_path(user);
     user_icon(user) + " " + link_to(user.name, path, :class => user_class(user));
   end
   

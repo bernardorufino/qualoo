@@ -1,7 +1,7 @@
 <p>Algumas ações disponíveis:</p>
 <ul id="user-actions">
 	<li><%= icon "email" %> <%= link_to "Mensagens", messages_path %></li>
-	<li><%= icon "vcard" %> <%= link_to "Vizualizar perfil", user_path(current_user) %></li>
+	<li><%= icon "vcard" %> <%= link_to "Vizualizar perfil", profile_path(current_profile) %></li>
 	<li><%= icon "picture" %> <%= link_to "Atualizar foto", edit_avatar_path %></li>
 	<li><%= icon "application_form_edit" %> <%= link_to "Editar dados", edit_user_path(current_user) %></li>
 	<% if current_profile.location %>

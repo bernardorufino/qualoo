@@ -34,27 +34,16 @@ class ApplicationController < ActionController::Base
     redirect_to page_path(:dashboard);
   end
   
-  def user_path_with_profile(user, *args)
-    user = User.find(user) if user.kind_of?(Fixnum);
-    original_use_paths = [
-      user_path_without_profile(params[:id]), 
-      edit_user_path(params[:id]), 
-      new_user_path(params[:id])
-    ];
-    if user.profile and not original_use_paths.include?(request.path)
-      send("#{user.profile_type.downcase}_path", user.profile,*args)
-    else
-      user_path_without_profile(user, *args);
-    end
+  def profile_path(user_or_profile, *args)
+    user = (user_or_profile.respond_to?(:user)) ? user_or_profile.user : user_or_profile;
+    send("#{user.profile_type.downcase}_path", user.profile, *args);
   end
   
-  alias_method_chain :user_path, :profile rescue nil;
-  
-  def user_url(*args)
-    request.protocol + request.host_with_port + user_path(*args);
+  def profile_url(*args)
+    request.protocol + request.host_with_port + profile_path(*args);
   end
   
-  helper_method :user_path, :user_url;
+  helper_method :profile_path, :profile_url;
   
   def authenticate(opts={})
     if not logged_in?
