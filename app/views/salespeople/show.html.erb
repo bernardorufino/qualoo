@@ -26,13 +26,13 @@
 <% end %>
 
 <% if @salesperson.posts.any? %>
-	<h3>Posts</h3>
+	<h3>Mural</h3>
 	<% if current_user?(@salesperson) %>
 		<%= render :partial => "posts/form" %>
 	<% end %>
 	<%= render :partial => "posts/list", :locals => {posts: @salesperson.posts} %>
 <% elsif current_user?(@salesperson) %>
-	<h3>Posts</h3>
+	<h3>Mural</h3>
 	<p>Você não tem posts. Crie um abaixo:</p>
 	<%= render :partial => "posts/form" %>
 	<p class="clear"></p>

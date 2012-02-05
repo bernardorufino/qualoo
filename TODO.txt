@@ -1,0 +1,24 @@
+# TODO: Welcome page com 2 saidas
+ ## Cadastro de profissional
+ ## Cadastro de cliente
+ ## Formularios fora do 'layout' da aplicação
+   ### Somente com o header
+ ## Retirar ICONES
+
+## TODO: Salespeople#show posts/_list 
+ ## Alinhar a direita o 'tempo', tirar o relogio, colocar um X no lugar no deletar
+ 
+## TODO: Genero -> Categoria
+ ## Sumir com genero do menu principal 
+
+# TODO: Atualizar pagina inicial:
+ ## Colocar login no header, a direita,
+ ## Welcome page pro principal apontando para o formulario 
+    de cadastrado de cada modalidade.
+# TODO: Adaptar estrutura da pagina de perfil, criar campo
+ ## about_me em Salesperson, exibir cidade, estado, etc.
+ ## ver v5/perfil.htm
+ 
+## TODO: Substituir pesquisa por raio de localização por mapa de revendedoras próximas
+
+## TODO: Analytics in all the pages!

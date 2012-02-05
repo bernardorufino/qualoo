@@ -553,15 +553,19 @@ ul {
 	}
 }
 #new-post {
-	$width: 300px;
+	$width: auto;
+	textarea {
+		width: auto;
+		// TODO: Solve padding issue;
+	}
 	textarea, .actions {
 		// textarea padding is 1px, under default.css.scss
-		width: $width - 1px - 1px;
+		//width: $width - 1px - 1px;
 	}
 	.actions {
 		$new-post-actions-padding: 3px;
 		padding: $new-post-actions-padding; 
-		width: $width - (2 * $new-post-actions-padding);
+		//width: $width - (2 * $new-post-actions-padding);
 		position: relative;
 		bottom: 2px;
 	}

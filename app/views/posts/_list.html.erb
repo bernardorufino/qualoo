@@ -3,7 +3,7 @@
 		<div class="post">
 			<p class="body"><%= icon "note" %> <%= post.body %></p>
 			<p class="meta">
-				<%= post.nlikes.count "Ninguem curtiu ainda", "? pessoa curtiu", "? pessoas curtiram" %> 
+				<%= post.nlikes.count "", "? ", "? " %> 
 				<% if logged_in? and post.liked?(current_user) %>
 					<%= icon "thumb_down" %> <%= link_to "Descurtir", post_like_path(post), :method => :delete %> 
 				<% elsif logged_in? %>

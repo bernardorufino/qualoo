@@ -3,10 +3,11 @@
 # Consumer.all.reject(&:user).each(&:destroy)
 # Salesperson.all.reject(&:user).each(&:destroy)
 class ApplicationController < ActionController::Base
+  # TODO: Add a "send message" link to profiles
   # TODO: OK Implement GEOCODER
-  # TODO: Use .gitignore for avatars
+  # TODO: OK Use .gitignore for avatars
   # TODO: OK Check pages and search
-  # TODO: Implement a helper use_original_user_path to be added to the pages or actions in which
+  # TODO: CANCEL Implement a helper use_original_user_path to be added to the pages or actions in which
   # we need to use the original user_path, instead of the list in the method, check user_path below
   # TODO: OK When implement Geocoder, include visibility_id in Location!
   # TODO: Create observations for location's form (About adress and stuff)
@@ -31,7 +32,7 @@ class ApplicationController < ActionController::Base
   protected
   def welcome_user
     flash[:notice] = "Bem vindo, #{current_profile.first_name}!";
-    redirect_to page_path(:dashboard);
+    redirect_to profile_path(current_user);
   end
   
   def profile_path(user_or_profile, *args)
