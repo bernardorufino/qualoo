@@ -22,8 +22,31 @@ function resizeWindow(e){
 	}
 	
 }
+function preLoadImages(){
+  images = [
+    "consumer-button.png", 
+    "consumer-button-active.png", 
+    "consumer-button-hover.png",
+    "consumer-button-selected.png", 
+    "consumer-button-selected-active.png", 
+    "consumer-button-selected-hover.png",
+    "salesperson-button.png", 
+    "salesperson-button-active.png", 
+    "salesperson-button-hover.png",
+    "salesperson-button-selected.png", 
+    "salesperson-button-selected-active.png", 
+    "salesperson-button-selected-hover.png",
+    "submit.png",
+    "submit-active.png",
+    "submit-hover.png"
+  ];
+  for(var i = 0; i < images.length; i++){
+    $("<img />").attr("src", "/assets/" + images[i]);
+  }
+}
 
 $(document).ready(function(){
+	preLoadImages();
 	// Some IE CSS hack ;)
 	$("body *:last-child").addClass("last-child")
 	// If we can put the center inside the window, lets not user scrolling :)
