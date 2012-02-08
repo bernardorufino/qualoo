@@ -1,0 +1,18 @@
+<div id="left">
+	<%= image_tag "promo/slogan.png", :id => "slogan", :alt => "Seja Empreendedora. Seja Pioneira. Cadastre-se agora e aguarde nosso lançamento!" %>	
+</div>
+<div id="right" class="registry">
+	<ul>
+		<li class="consumer<%= selected_class(:consumer, @guest) %>"><%= link_to "&nbsp;".html_safe, page_path(:presentation, :profile_type => "Consumer") %></li>
+		<li class="salesperson<%= selected_class(:salesperson, @guest) %>"><%= link_to "&nbsp;".html_safe, page_path(:presentation, :profile_type => "Salesperson") %></li>
+	</ul>
+	
+	<%= form_for @guest do |f| %>
+		<%= f.hidden_field :profile_type %>
+		<%= f.field_set :name, "Nome: " %>
+		<%= f.field_set :email, "Email: " %>
+		<%= f.field_set :city, "Cidade: " %>
+		<%= submit_tag "&nbsp;".html_safe %>
+		<div class="clear"></div>
+	<% end %>
+</div>

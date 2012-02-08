@@ -4,9 +4,9 @@ Qualoo::Application.routes.draw do
   
   CRUD = [:show, :edit, :update, :destroy];
   
-  root :to => "pages#welcome";
+  root :to => "pages#presentation";
   
-  resources :consumer_salesperson_relationships;  
+  resources :consumer_salesperson_relationships, :guests;  
 
   resources :tags do
     resources :consumer_salesperson_relationships, except: CRUD;

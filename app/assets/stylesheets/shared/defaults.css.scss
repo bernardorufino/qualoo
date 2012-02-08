@@ -1,0 +1,104 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+    border: 0;
+    font-size: 100%;
+    margin: 0;
+    outline: 0;
+    padding: 0;
+}
+h1 {font-size: 140%;}
+h2 {font-size: 120%;}
+h3 {font-size: 117%;}
+h4 {font-size: 114%;}
+h5 {font-size: 110%;}
+h6 {font-size: 105%;}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after, q:before, q:after {
+    content: '';
+    content: none;
+}
+:focus {
+    outline: 0;
+}
+::-moz-selection{ 
+	background: #D92534;
+	color: #F1F1F1;
+} 
+::selection{ 
+	background: #D92534;
+	color: #F1F1F1;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+a {
+	text-decoration: none;
+}
+a img {
+	border: 0;
+}
+input, textarea {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+    resize: none;
+    padding: 1px;
+}
+p {
+	padding-bottom: 5px;
+}
+
+$link-color: #0000EE;
+
+a, a:visited {
+	color: $link-color;
+	&:hover {
+		color: lighten($link-color, 10%);
+		text-decoration: underline;
+	}
+	&:active {
+		color: lighten($link-color, 5%);
+	}
+}
+.invisible {
+	display: block;
+	width: 0;
+	height: 0;
+	display: none;
+}
+.clear {
+	display: block;
+	clear: both;
+	margin: 0;
+	padding: 0;
+	height: 0;
+}
+.zero {
+	margin: 0;
+	padding: 0;
+	width: auto;
+}
+.centralized {
+	text-align: center;
+}
+.inline {
+	.icon {
+		vertical-align: middle;
+		position: relative;
+		bottom: 1px;
+	}
+}
+ul.inline {
+	li {
+		display: inline;
+	}
+}
+html {
+	font-family: "Helvetica Neue", Arial, sans-serif;
+	font-size: 10pt;
+	color: #000000;
+}

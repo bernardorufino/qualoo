@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Qualoo<%= title :prefix => " | " %></title>
+  <link rel="shortcut icon" href="<%= asset_path "favicon.ico" %>" />
+  <%= stylesheet_link_tag    "promo" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body id="promo">
+
+<div id="wrapper">
+	<div id="header">
+		<h1><%= link_to "Qualoo", root_path %></h1>
+	</div>
+	
+	<div id="main">
+		<%= yield %>
+		<div class="clear"></p>
+	</div>
+</div>
+
+<div id="footer">
+	<%= image_tag "promo/footer-logo.png" %>
+	<p>
+		<strong>Qualoo</strong><br />
+		<%= link_to "www.qualoo.com.br", root_path %>
+	</p>
+	<p class="invisible">
+		Curta e comente aqui!<br />
+		<%= image_tag "icons/user.png" %>
+		<%= image_tag "icons/user_red.png" %>
+		<%= image_tag "icons/user_green.png" %>
+	</p>
+</div>
+
+</body>
+</html>
